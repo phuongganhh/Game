@@ -1,0 +1,18 @@
+<div class="News ">
+    <div class="C ">
+        <a href="news.php?news=1#MainAccordin " style='color: #ad8732;border-bottom: #93752c 3px solid;'>TIN TỨC</a>
+        <a href="news.php?events=1#MainAccordin ">SỰ KIỆN</a>
+        <a href="news.php?activitys=1#MainAccordin ">HOẠT ĐỘNG</a>
+        <a href="news.php?features=1#MainAccordin ">TÍNH NĂNG</a>
+        <a href="news.php?camnang=1#MainAccordin ">CẨM NANG</a>
+        <a href="news.php?tanthu=1#MainAccordin ">TÂN THỦ</a>
+    </div>
+    <div class="Content" *ngIf="news">
+        <div *ngFor="let item of news"><a [routerLink]="[item.url]">{{item.title}}</a>
+            <p>{{item.created_date}}</p>
+        </div>
+    </div>
+    <div class="Pages">
+        <b>1</b>
+    </div>
+</div>

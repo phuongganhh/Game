@@ -1,0 +1,70 @@
+<div style="float: left;width: 315px;height: 412px;">
+    <a class="ButtonDownLoadGame" href="content.php?i=download#MainAccordin" target="_blank"><span></span></a>
+    <div class="LoginRegister">
+        <div style="float: left;width: 315px;height: 56px;">
+            <a class="ButtonRegister" (click)="this.type = 2"></a>
+            <a class="ButtonToupCard" target="_blank"></a>
+        </div>
+        <form class="FormLogin" *ngIf="this.user && this.type == -1">
+            <div style="float: left;width: 311px;border: 1px solid #e4e4e4;margin-left: 1px;background: #fff;">
+                <div style="text-align:center;height: 17px;padding: 3px 0px 0px 0px;background: #EEEEEE;font-family: tahoma;font-size: 12px;"><strong>TÀI KHOẢN</strong></div>
+                <div style="float: left;width: 303px;padding-top: 3px;padding-left: 8px;">
+                    <img src="http://jxbachu.com/include/web_skins/tisu/images/accinfo_no_avata.png" style="float: left;">
+                    <div style="float: left;margin-top: 2px;margin-left: 5px;font-size: 14px;">
+                        <a style="color#000;display: inline-block;margin-bottom: 6px;">Xin chào tài khoản: <strong><span id="InfoLoginAccount">skyber</span></strong></a><br>
+                        <img src="http://jxbachu.com/include/web_skins/tisu/images/accinfo_xacthuc.png" style="float: left;margin-right: 4px;">
+                        <a style="display: inline-block;background: none repeat scroll 0 0 #1DB455;padding: 2px 5px;text-align: center;min-width: 106px;line-height: 20px;color: white;font-size: 12px;">Số dư tài khoản: <span id="CountCoinAccount">0</span> Tiền đồng</a>
+                    </div>
+                </div>
+                <div style="float: left;width: 303px;padding: 6px 0 6px 8px;border-top: 1px solid #e4e4e4;font-size: 14px;text-align: center;">
+                    <input autocomplete="off" class="btnLogOutAjaxFormIndex" (click)="SignOut()" value="Đăng xuất" type="button" style="background: transparent;border: 1px solid black;width: 147px;height: 40px;cursor: pointer;color: red;font-weight: bold;text-transform: uppercase;">
+                </div>
+            </div>
+            <a style="font-size: 14px;margin-left: 1px;width: 313px;height: 46px;margin-top: 0px;padding-top: 20px;background: linear-gradient(to bottom, #23D264 0%,#15823D 100%);" class="ButtonLogin">Thông tin tài khoản chi tiết</a>
+            <input autocomplete="off" id="AccountLoginOK" value="LoginOK" style="display:none;">
+        </form>
+        <form class="FormLogin" *ngIf="type === 1">
+            <a style="display:none;"></a>
+            <div style="height: 183px;margin-left: 30px;">
+                <div style="height: 15px;color: #FF2222;font-size: 12px;font-weight: bold;text-align: center;line-height: 20px;margin-bottom: 3px; width: 254px;"></div>
+                <p style="margin: 0;">
+                    <input [(ngModel)]="username" style="height:17px; padding-left: 34px;width: 223px;" autocomplete="off" class="InputUserName" type="text" name="login" placeholder="Tên tài khoản">
+                </p>
+                <p style="margin: 0;padding-top: 2px;">
+                    <input [(ngModel)]="password" style="height:17px; padding-left: 34px;width: 223px;" autocomplete="off" class="InputUserName" type="password" name="login" placeholder="Mật khẩu">
+                </p>
+                <a class="LineForgetPass" style="cursor: pointer;line-height: 24px;margin-left: 0;" (click)="this.type = 3">Bạn quên mật khẩu?</a>
+                <button (click)="SignIn();" type="button" style="background: transparent; border: 1px solid white;color: wheat;width: 255px;height: 45px;cursor: pointer;">ĐĂNG NHẬP</button>
+            </div>
+        </form>
+        <form class="FormLogin" *ngIf="type === 2">
+            <a style="display:none;"></a>
+            <div style="height: 183px;margin-left: 30px;">
+                <div style="height: 15px;color: #FF2222;font-size: 12px;font-weight: bold;text-align: center;line-height: 20px;margin-bottom: 3px; width: 254px;"></div>
+                <p style="margin: 0;">
+                    <input [(ngModel)]="username" style="height:17px;padding-left: 34px;width: 223px;" autocomplete="off" class="InputUserName" type="text" name="login" placeholder="Tên tài khoản">
+                </p>
+                <p style="margin: 0;padding-top: 2px;">
+                    <input [(ngModel)]="password" style="height:17px; padding-left: 34px;width: 223px;" autocomplete="off" class="InputUserName" type="password" name="login" placeholder="Mật khẩu">
+                </p>
+                <p style="margin: 0;padding-top: 2px;">
+                    <input [(ngModel)]="email" style="height:17px; padding-left: 34px;width: 223px;" autocomplete="off" class="InputUserName" type="email" name="login" placeholder="Gmail để xác thực tài khoản">
+                </p>
+                <a class="LineForgetPass" style="cursor: pointer;line-height: 24px;margin-left: 0;" (click)="this.type = 3">Bạn quên mật khẩu?</a>
+                <a class="LineForgetPass" style="cursor: pointer;line-height: 24px;color: yellow;" (click)="this.type = 1">Đăng nhập!</a>
+                <button type="button" (click)="SignUp()" style="background: transparent; border: 1px solid white;color: wheat;width: 255px;height: 45px;cursor: pointer;font-weight: bold;">ĐĂNG KÝ</button>
+            </div>
+        </form>
+        <form class="FormLogin" *ngIf="type === 3">
+            <a style="display:none;"></a>
+            <div style="height: 183px;margin-left: 30px;">
+                <div style="height: 15px;color: #FF2222;font-size: 12px;font-weight: bold;text-align: center;line-height: 20px;margin-bottom: 3px; width: 254px;"></div>
+                <p style="margin: 0;">
+                    <input [(ngModel)]="email" style="height:17px;padding-left: 34px;width: 223px;" autocomplete="off" class="InputUserName" type="email" name="login" placeholder="Gmail">
+                </p>
+                <a class="LineForgetPass" style="margin-left:0;cursor: pointer;line-height: 24px;color: yellow;" (click)="this.type = 1">Đăng nhập!</a>
+                <button type="button" (click)="Forget()" style="background: transparent; border: 1px solid white;color: wheat;width: 255px;height: 45px;cursor: pointer;font-weight: bold;">QUÊN MẬT KHẨU</button>
+            </div>
+        </form>
+    </div>
+</div>

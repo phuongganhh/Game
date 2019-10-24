@@ -1,6 +1,8 @@
-﻿using SqlKata.Compilers;
+﻿using Common.service;
+using SqlKata.Compilers;
 using SqlKata.Execution;
 using System;
+using System.Data;
 using System.Data.Odbc;
 using System.Data.SqlClient;
 using System.Globalization;
@@ -40,28 +42,26 @@ namespace Common
             return sb.ToString();
         }
 
-        public QueryFactory db
+        public QueryFactory Query
         {
             get
             {
-                var connection = new OdbcConnection();
-                var compiler = new MySqlCompiler();
-                var db = new QueryFactory(connection, compiler);
-                return db;
+                return new QueryFactory(this.Database.Connection, new MySqlCompiler());
             }
         }
-        public QueryFactory sql
+        public DatabaseConnectService Database
         {
             get
             {
-                var connection = new SqlConnection();
-                var compiler = new SqlServerCompiler();
-                var db = new QueryFactory(connection, compiler);
-                return db;
+                return DatabaseConnectService.Instance;
             }
         }
-        private void SetPermission()
+        public IDbConnection Connection
         {
+            get
+            {
+                return DatabaseConnectService.Instance.Connection;
+            }
         }
         public static ObjectContext CreateContext(Controller controller, bool isAdmin = false)
         {

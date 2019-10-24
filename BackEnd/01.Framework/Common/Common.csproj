@@ -31,6 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Dapper, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Dapper.2.0.30\lib\net461\Dapper.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Extensions.Caching.Abstractions, Version=3.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Microsoft.Extensions.Caching.Abstractions.3.0.0\lib\netstandard2.0\Microsoft.Extensions.Caching.Abstractions.dll</HintPath>
     </Reference>
@@ -48,6 +51,9 @@
     </Reference>
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Buffers, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
@@ -104,10 +110,14 @@
     <Compile Include="Caching\ICacheManager.cs" />
     <Compile Include="Caching\MemoryCacheManager.cs" />
     <Compile Include="Caching\SessionCacheManager.cs" />
+    <Compile Include="Controller\BaseController.cs" />
+    <Compile Include="Database\OdbcExtension.cs" />
+    <Compile Include="Hash.cs" />
     <Compile Include="ICommand.cs" />
     <Compile Include="ObjectContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ResultExtension.cs" />
+    <Compile Include="service\DatabaseConnectService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

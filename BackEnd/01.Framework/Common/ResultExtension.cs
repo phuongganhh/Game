@@ -1,18 +1,23 @@
 ﻿using System;
+using System.Threading.Tasks;
 
 namespace Common.Framework
 {
     public static class ResultExtensions
     {
-        public static IResult ThrowIfFail(this IResult obj, string keyword = "Message")
+        public static Task ThrowIfFail(this Task obj, string keyword = "Message")
         {
-            if (obj.code != 200)
-                throw new Exception(string.Format("{0} : {1}", keyword, obj.message));
+            if (obj.Exception != null)
+                throw new Exception(string.Format("{0} : {1}", keyword, obj.Exception.Message));
             return obj;
         }
-        public static IResult<T> ThrowIfFail<T>(this IResult<T> obj, string keyword = "Message")
+        public static Task<T> ThrowIfFail<T>(this Task<T> obj, string keyword = "Message")
         {
-            return ((IResult)obj).ThrowIfFail(keyword) as IResult<T>;
+            if(obj.Exception != null)
+            {
+                throw new Exception(string.Format("{0} : {1}", keyword, obj.Exception.Message));
+            }
+            return obj;
         }
     }
 }

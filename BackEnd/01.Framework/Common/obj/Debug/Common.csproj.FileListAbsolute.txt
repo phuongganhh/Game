@@ -141,3 +141,6 @@ D:\Project\zo\Game\BackEnd\01.Framework\Common\bin\Debug\System.Web.WebPages.xml
 D:\Project\zo\Game\BackEnd\01.Framework\Common\bin\Debug\System.Web.WebPages.Deployment.xml
 D:\Project\zo\Game\BackEnd\01.Framework\Common\bin\Debug\System.Web.WebPages.Razor.xml
 D:\Project\zo\Game\BackEnd\01.Framework\Common\obj\Debug\Common.csproj.CopyComplete
+D:\Project\zo\Game\BackEnd\01.Framework\Common\bin\Debug\Newtonsoft.Json.dll
+D:\Project\zo\Game\BackEnd\01.Framework\Common\bin\Debug\Dapper.xml
+D:\Project\zo\Game\BackEnd\01.Framework\Common\bin\Debug\Newtonsoft.Json.xml

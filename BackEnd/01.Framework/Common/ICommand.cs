@@ -1,38 +1,42 @@
 ﻿using System;
 using System.Net;
+using System.Threading.Tasks;
 
 namespace Common
 {
     public interface ICommand : IDisposable
     {
-        Result Execute(ObjectContext context);
+        Task<Result> Execute(ObjectContext context);
     }
 
     public interface ICommand<T> : IDisposable
     {
-        Result<T> Execute(ObjectContext context);
+        Task<Result<T>> Execute(ObjectContext context);
     }
 
     public abstract class CommandBase : ICommand
     {
-        protected virtual void ValidateCore(ObjectContext context)
+        protected virtual Task ValidateCore(ObjectContext context)
         {
+            return Task.CompletedTask;
         }
-        protected virtual void OnExecutingCore(ObjectContext context)
+        protected virtual Task OnExecutingCore(ObjectContext context)
         {
+            return Task.CompletedTask;
         }
-        protected virtual void OnExecutedCore(ObjectContext context, Result result)
+        protected virtual Task OnExecutedCore(ObjectContext context, Result result)
         {
+            return Task.CompletedTask;
         }
-        protected abstract Result ExecuteCore(ObjectContext context);
-        public Result Execute(ObjectContext context)
+        protected abstract Task<Result> ExecuteCore(ObjectContext context);
+        public async Task<Result> Execute(ObjectContext context)
         {
             try
             {
-                ValidateCore(context);
-                OnExecutingCore(context);
-                var result = ExecuteCore(context);
-                OnExecutedCore(context, result);
+                await ValidateCore(context);
+                await OnExecutingCore(context);
+                var result = await ExecuteCore(context);
+                await OnExecutedCore(context, result);
                 return result;
             }
             catch (BusinessException ex)
@@ -57,13 +61,16 @@ namespace Common
         {
         }
 
-        protected Result Success(string message = "Success")
+        protected Task<Result> Success(string message = "Success")
         {
-            return new Result
+            var r = new Result
             {
-                code = 0,
                 message = message
             };
+            return Task.Run(() =>
+            {
+                return r;
+            });
         }
     }
 
@@ -73,24 +80,27 @@ namespace Common
         /// <summary>
         /// Validate before execute a command. Base validation does nothing
         /// </summary>
-        protected virtual void ValidateCore(ObjectContext context)
+        protected virtual Task ValidateCore(ObjectContext context)
         {
+            return Task.CompletedTask;
         }
-        protected virtual void OnExecutingCore(ObjectContext context)
+        protected virtual Task OnExecutingCore(ObjectContext context)
         {
+            return Task.CompletedTask;
         }
-        protected virtual void OnExecutedCore(ObjectContext context, Result<T> result)
+        protected virtual Task OnExecutedCore(ObjectContext context, Result<T> result)
         {
+            return Task.CompletedTask;
         }
-        protected abstract Result<T> ExecuteCore(ObjectContext context);
-        public Result<T> Execute(ObjectContext context)
+        protected abstract Task<Result<T>> ExecuteCore(ObjectContext context);
+        public async Task<Result<T>> Execute(ObjectContext context)
         {
             try
             {
-                ValidateCore(context);
-                OnExecutingCore(context);
-                var result = ExecuteCore(context);
-                OnExecutedCore(context, result);
+                await ValidateCore(context);
+                await OnExecutingCore(context);
+                var result = await ExecuteCore(context);
+                await OnExecutedCore(context, result);
                 return result;
             }
             catch (BusinessException ex)
@@ -114,14 +124,17 @@ namespace Common
         {
         }
         
-        protected Result<T> Success(T data, string message = "Success")
+        protected Task<Result<T>> Success(T data, string message = "Success")
         {
-            return new Result<T>
+            var r =  new Result<T>
             {
                 data = data,
-                code = 0,
                 message = message
             };
+            return Task.Run(() =>
+            {
+                return r;
+            });
         }
     }
 
@@ -142,7 +155,7 @@ namespace Common
         public int? code { get; set; }
         public Result()
         {
-            this.code = 0;
+            this.code = 200;
             this.message = "Success";
         }
     }

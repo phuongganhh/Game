@@ -1,0 +1,14 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/BackEnd/01.Framework/LF.Framework.Mvc/obj/Debug
+/BackEnd/01.Framework/PAFamework/obj/Debug
+/BackEnd/01.Framework/QueryBuilder/obj
+/BackEnd/01.Framework/SimpleTCP/obj/Debug
+/BackEnd/01.Framework/SqlKata.Execution/obj
+/BackEnd/02.Entity/PA.Entities/obj/Debug
+/BackEnd/03.Common/PA.Common/obj/Debug
+/BackEnd/08.Realtime/NodeJS/obj/Debug
+/BackEnd/10.Client/Base/obj/Debug
+/BackEnd/.vs

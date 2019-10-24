@@ -12,3 +12,9 @@
 /BackEnd/08.Realtime/NodeJS/obj/Debug
 /BackEnd/10.Client/Base/obj/Debug
 /BackEnd/.vs
+/BackEnd/01.Framework/Common/bin/Debug
+/BackEnd/01.Framework/QueryBuilder/bin/Debug
+/BackEnd/01.Framework/SqlKata.Execution/bin/Debug
+/BackEnd/02.Entity/Entity/bin/Debug
+/BackEnd/02.Entity/Entity/obj/Debug
+/BackEnd/03.API/API/bin

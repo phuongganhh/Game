@@ -10,8 +10,27 @@ namespace Common
     {
         public static string Decode(this string s)
         {
-            byte[] data = Convert.FromBase64String(s);
-            return Encoding.UTF8.GetString(data);
+            try
+            {
+                byte[] data = Convert.FromBase64String(s);
+                return Encoding.UTF8.GetString(data);
+            }
+            catch (Exception)
+            {
+                return s;
+            }
+            
+        }
+        public static string sha256(this string randomString)
+        {
+            var crypt = new System.Security.Cryptography.SHA256Managed();
+            var hash = new System.Text.StringBuilder();
+            byte[] crypto = crypt.ComputeHash(Encoding.UTF8.GetBytes(randomString));
+            foreach (byte theByte in crypto)
+            {
+                hash.Append(theByte.ToString("x2"));
+            }
+            return hash.ToString();
         }
     }
 }

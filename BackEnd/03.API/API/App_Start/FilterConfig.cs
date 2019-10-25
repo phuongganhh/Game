@@ -7,6 +7,7 @@ namespace API
     {
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
+            filters.Add(new Cor());
             filters.Add(new HandleErrorAttribute());
         }
     }

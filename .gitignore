@@ -18,3 +18,8 @@
 /BackEnd/02.Entity/Entity/bin/Debug
 /BackEnd/02.Entity/Entity/obj/Debug
 /BackEnd/03.API/API/bin
+/BackEnd/02.Entity/Entity/bin/Release
+/BackEnd/01.Framework/Common/bin/Release
+/BackEnd/01.Framework/QueryBuilder/bin/Release
+/BackEnd/01.Framework/SqlKata.Execution/bin/Release
+/BackEnd/03.API/API/obj/Release

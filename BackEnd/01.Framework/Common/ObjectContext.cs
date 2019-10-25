@@ -26,6 +26,13 @@ namespace Common
                 return MemoryCacheManager.Instance;
             }
         }
+        public string Token
+        {
+            get
+            {
+                return DateTime.Now.Ticks.ToString().sha256();
+            }
+        }
         public string MD5(string input)
         {
             // step 1, calculate MD5 hash from input

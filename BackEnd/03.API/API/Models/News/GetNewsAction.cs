@@ -19,17 +19,8 @@ namespace API.Models
         public long? total_page { get; set; }
         protected override async Task<Result<IEnumerable<dynamic>>> ExecuteCore(ObjectContext context)
         {
-            var result = await this.GetNewsGroup(context);
-            foreach (var item in result)
-            {
-                item.News = await this.GetNews(context, item.id);
-                foreach (var n in item.News)
-                {
-                    n.title = n.title.Decode();
-                }
-                item.TotalRecord = await this.GetTotal(context, item.id);
-            }
-            return await Success(result);
+            var data = await context.Query.From("content").Fetch<Content>();
+            return await Success(data);
         }
         protected override Task ValidateCore(ObjectContext context)
         {
@@ -42,13 +33,6 @@ namespace API.Models
             var sql = $"SELECT COUNT(*) FROM news WHERE news.news_group_id = '{group_id}'";
             return context.Connection.ExecuteScalarAsync<int>(sql);
         }
-        private Task<IEnumerable<News>> GetNews(ObjectContext context,string group_id)
-        {
-            return context.Query.From("news").Where("news_group_id",group_id).ForPage(this.current_page.Value, this.page_size.Value).Get<News>();
-        }
-        private Task<IEnumerable<NewsGroup>> GetNewsGroup(ObjectContext context)
-        {
-            return context.Query.From("news_group").Get<NewsGroup>();
-        }
+        
     }
 }

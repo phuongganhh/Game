@@ -1,0 +1,6 @@
+C:\Project\Game\BackEnd\02.Entity\Entity\bin\Release\Entity.dll
+C:\Project\Game\BackEnd\02.Entity\Entity\bin\Release\Entity.pdb
+C:\Project\Game\BackEnd\02.Entity\Entity\obj\Release\Entity.csprojAssemblyReference.cache
+C:\Project\Game\BackEnd\02.Entity\Entity\obj\Release\Entity.csproj.CoreCompileInputs.cache
+C:\Project\Game\BackEnd\02.Entity\Entity\obj\Release\Entity.dll
+C:\Project\Game\BackEnd\02.Entity\Entity\obj\Release\Entity.pdb

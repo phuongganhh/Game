@@ -12,7 +12,7 @@ namespace Entity
     public class NewsGroup
     {
         [Key]
-        public string id { get; set; }
+        public long id { get; set; }
         public string name { get; set; }
         
         public IEnumerable<News> News { get; set; }

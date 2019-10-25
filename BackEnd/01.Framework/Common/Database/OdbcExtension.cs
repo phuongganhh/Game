@@ -1,7 +1,9 @@
 ﻿using Common.service;
 using Dapper;
+using Dapper.FastCrud;
 using Newtonsoft.Json;
 using SqlKata;
+using SqlKata.Compilers;
 using SqlKata.Execution;
 using System;
 using System.Collections.Generic;
@@ -29,32 +31,24 @@ namespace Common.Database
             }
         }
         private static readonly HttpClient client = new HttpClient();
-        public static async Task<IEnumerable<T>> Get<T>(this Query query)
+        public static Task<IEnumerable<T>> Gets<T>(this Query query)
         {
             var sql = query.Complie();
 
-            using(var cmd = DatabaseConnectService.Instance.Connection.CreateCommand())
-            {
-                cmd.CommandText = sql.RawSql;
-                cmd.Parameters.Map(sql.NamedBindings);
-                using(var reader = await cmd.ExecuteReaderAsync())
-                {
-                    var lst = new List<T>();
-                    while (await reader.ReadAsync())
-                    {
-                        var dic = new Dictionary<string, object>();
-                        for (int i = 0; i < reader.FieldCount; i++)
-                        {
-                            dic[reader.GetName(i)] = reader.GetValue(i);
-                        }
-                        var json = JsonConvert.SerializeObject(dic);
-                        lst.Add(JsonConvert.DeserializeObject<T>(json));
-                    }
-                    return lst;
-                }
-
-            }
-        } 
+            return DatabaseConnectService.Instance.Connection.QueryAsync<T>(sql.RawSql, sql.NamedBindings);
+        }
+        public static Task<IEnumerable<T>> FindAsync<T>(this ObjectContext context)
+        {
+            T data = default(T);
+            var t = data.GetType();
+            var initQuery = QueryFactory.Instance.From(t.Name);
+            var sql = initQuery.Complie();
+            return context.Connection.QueryAsync<T>(sql.RawSql, sql.NamedBindings);
+        }
+        public static Task Execute(this SqlResult sql)
+        {
+            return DatabaseConnectService.Instance.Connection.QueryAsync(sql.RawSql, sql.NamedBindings);
+        }
         public static async Task<IEnumerable<T>> Fetch<T>(this Query query)
         {
             var sql = query.Complie();
@@ -76,6 +70,26 @@ namespace Common.Database
 
             var responseString = await response.Content.ReadAsStringAsync();
             return JsonConvert.DeserializeObject<IEnumerable<T>>(responseString);
+        }
+        public static Task FetchAsync(this SqlResult query)
+        {
+            var sql = query;
+
+            var values = new Dictionary<string, string>();
+            values["user"] = "test";
+            values["db"] = "pa";
+            values["password"] = "test";
+            values["host"] = "localhost";
+            values["q"] = sql.ToString();
+
+            if (!client.DefaultRequestHeaders.Any(x => x.Key.Equals("secret")))
+            {
+                client.DefaultRequestHeaders.Add("secret", "6f555414cca6be3825f3d5fcb9f09220");
+            }
+            var content = new FormUrlEncodedContent(values);
+
+            return client.PostAsync("http://103.27.237.153/auth/query.php", content);
+
         } 
     }
 }

@@ -1,5 +1,6 @@
 using System;
 using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using SqlKata;
 using SqlKata.Compilers;
@@ -12,7 +13,14 @@ namespace SqlKata.Execution
         public Compiler Compiler { get; set; }
         public Action<SqlResult> Logger = result => { };
         public int QueryTimeout { get; set; } = 30;
-
+        private static QueryFactory _instance { get; set; }
+        public static QueryFactory Instance
+        {
+            get
+            {
+                return _instance ?? (_instance = new QueryFactory(new SqlConnection(), new MySqlCompiler()));
+            }
+        }
         public QueryFactory() { }
 
         public QueryFactory(IDbConnection connection, Compiler compiler)

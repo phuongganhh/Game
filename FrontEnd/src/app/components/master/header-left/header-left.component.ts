@@ -35,6 +35,8 @@ export class HeaderLeftComponent implements OnInit {
   SignOut(){
     this.user = null;
     this.type = 1;
+    this.username = '';
+    this.password = '';
     //todo: clear cookie
   }
   SignIn(){
@@ -42,6 +44,7 @@ export class HeaderLeftComponent implements OnInit {
       if(x.code === 200){
         this.type = -1;
         this.user = x.data;
+        localStorage.setItem('token',x.data.token);
       }
       else{
         alert(x.message);

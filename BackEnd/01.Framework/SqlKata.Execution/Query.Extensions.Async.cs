@@ -17,7 +17,7 @@ namespace SqlKata.Execution
 
             xQuery.Logger(compiled);
 
-            return await xQuery.Connection.QueryAsync<T>(compiled.Sql, compiled.NamedBindings);
+            return await xQuery.Connection.QueryAsync<T>(compiled.RawSql, compiled.NamedBindings);
         }
 
         public static async Task<IEnumerable<dynamic>> GetAsync(this Query query)

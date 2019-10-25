@@ -296,3 +296,5 @@ D:\Project\zo\Game\BackEnd\01.Framework\Common\bin\Debug\Dapper.FastCrud.dll
 D:\Project\zo\Game\BackEnd\01.Framework\Common\bin\Debug\Entity.dll
 D:\Project\zo\Game\BackEnd\01.Framework\Common\bin\Debug\Entity.pdb
 D:\Project\zo\Game\BackEnd\01.Framework\Common\bin\Debug\Dapper.FastCrud.xml
+C:\Project\Game\BackEnd\01.Framework\Common\bin\Debug\Entity.dll
+C:\Project\Game\BackEnd\01.Framework\Common\bin\Debug\Entity.pdb

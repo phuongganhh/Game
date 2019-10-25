@@ -133,6 +133,7 @@
     <Compile Include="Models\Auth\SignInAction.cs" />
     <Compile Include="Models\NewsGroup\GetNewsGroupAction.cs" />
     <Compile Include="Models\News\GetNewsAction.cs" />
+    <Compile Include="Models\News\GetNewsDetailAction.cs" />
     <Compile Include="Models\User\UserGetAction.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

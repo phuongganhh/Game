@@ -1,18 +1,168 @@
-<div class="News ">
-    <div class="C ">
-        <a href="news.php?news=1#MainAccordin " style='color: #ad8732;border-bottom: #93752c 3px solid;'>TIN TỨC</a>
-        <a href="news.php?events=1#MainAccordin ">SỰ KIỆN</a>
-        <a href="news.php?activitys=1#MainAccordin ">HOẠT ĐỘNG</a>
-        <a href="news.php?features=1#MainAccordin ">TÍNH NĂNG</a>
-        <a href="news.php?camnang=1#MainAccordin ">CẨM NANG</a>
-        <a href="news.php?tanthu=1#MainAccordin ">TÂN THỦ</a>
-    </div>
-    <div class="Content" *ngIf="news">
-        <div *ngFor="let item of news"><a [routerLink]="[item.url]">{{item.title}}</a>
-            <p>{{item.created_time}}</p>
+<div class="RightBody">
+    <div class="newsbox" *ngIf="newsGroup">
+        <div class="checknav">
+            <ul class="cl">
+                <li *ngFor="let item of newsGroup"><a (mouseenter)="hover(item) " [routerLink]="[ '#'] " [ngClass]="{ 'curr': item.active} ">{{item.name}}</a></li>
+            </ul>
+            <span class="gz " [ngStyle]="{ 'width': '78px', 'left':(position * 78) + 'px'} " style="width: 78px; left: 156px; "></span>
+        </div>
+        <div class="checkcon" *ngFor="let item of newsGroup" [ngStyle]="{'display': item.active ? 'block' : 'none'}">
+            <ul>
+                <li style="height:33px;" *ngFor="let n of item.news"><span>[{{n.created_time}}]</span><a [routerLink]="['/detail/abc/' + n.id]">{{n.title}}</a></li>
+            </ul>
         </div>
     </div>
-    <div class="Pages">
-        <b>1</b>
+    <!--   developer: bil4i3n, contact:: fb.com/bil.jx   -->
+    <!--   developer: bil4i3n, contact:: fb.com/bil.jx   -->
+    <div class="role ">
+        <div class="rNav ">
+            <ul class="clearfix ">
+                <li class="curr cur "><a href="content.php?i=thieu_lam_phai#MainAccordin " class="curr ">KIM</a></li>
+                <li class=" "><a href="content.php?i=duong_mon_phai#MainAccordin " class=" ">MỘC</a></li>
+                <li class=" "><a href="content.php?i=nga_my_phai#MainAccordin " class=" ">THỦY</a></li>
+                <li class=" "><a href="content.php?i=cai_bang_phai#MainAccordin " class=" ">HỎA</a></li>
+                <li class=" "><a href="content.php?i=con_lon_phai#MainAccordinclass=&quot;&quot; " class=" ">THỔ</a></li>
+            </ul>
+            <span class="gz " style="width: 62px; left: 0px; "></span>
+        </div>
+        <div class="peo ">
+            <div class="comPeo " style="right: 0px; display: block; "><img src="/include/web_skins/tisu/images/role01.png "></div>
+            <div class="comPeo hide " style="right: 0px; display: none; "><img src="/include/web_skins/tisu/images/role03.png "></div>
+            <div class="comPeo hide " style="right: 0px; display: none; "><img src="/include/web_skins/tisu/images/role02.png "></div>
+            <div class="comPeo hide " style="right: 0px; display: none; "><img src="/include/web_skins/tisu/images/role04.png "></div>
+            <div class="comPeo hide " style="right: 0px; display: none; "><img src="/include/web_skins/tisu/images/role05.png "></div>
+        </div>
+        <div class="rTxt " style="left: 30px; ">
+            <div class="tDiv " style="display: block; height: 197px; ">
+                <h3>Môn phái theo đuổi: <a class="ABoxRoles " href="content.php?i=thien_vuong_bang#MainAccordin ">Thiên Vương</a>, <a class="ABoxRoles " href="content.php?i=thieu_lam_phai#MainAccordin ">Thiếu Lâm.</a></h3>
+                <p>Vị trí: Chính phái, Trung lập.</p>
+                <p>Người thuộc Hành Kim có sức mạnh hơn người, thân thể cường tráng; khi thăng cấp sinh mạng sẽ được tăng lên rất nhanh, tác dụng khi luyện tập ngoại công cũng mạnh hơn thấy rõ. Mỗi khi sinh mạng tăng lên một cấp thì ngoại công cũng tăng
+                    lên rất nhiều. Người thuộc hành Kim luyện tập nội công thì sẽ bất lợi.</p>
+            </div>
+            <div class="tDiv hide " style="display: none; ">
+                <h3>Môn phái theo đuổi: <a class="ABoxRoles " href="content.php?i=duong_mon_phai#MainAccordin ">Đường Môn</a>, <a class="ABoxRoles " href="content.php?i=ngu_doc_giao#MainAccordin ">Ngũ Độc.</a></h3>
+                <p>Vị trí: Trung lập, Tà phái.</p>
+                <p>Người thuộc hành Mộc thân pháp linh hoạt, phản ứng nhanh nhẹn, nhưng khi thăng cấp + luyện ngoại công thì việc tăng sinh mạng không thể hiện rõ, do yếu tố thể chất nên luyện tập nội công cũng có phần bất lợi.</p>
+            </div>
+            <div class="tDiv hide " style="display: none; ">
+                <h3>Môn phái theo đuổi: <a class="ABoxRoles " href="content.php?i=nga_my_phai#MainAccordin ">Nga My</a>, <a class="ABoxRoles " href="content.php?i=thuy_yen_phai#MainAccordin ">Thúy Yên.</a></h3>
+                <p>Vị trí: Chính phái, Trung lập.</p>
+                <p>Người thuộc hành Thủy có các loại thuộc tính tương đối bình thường, không có gì là đặc biệt, cũng không có thuộc tính nào mạnh nhất cả.</p>
+            </div>
+            <div class="tDiv hide " style="display: none; ">
+                <h3>Môn phái theo đuổi: <a class="ABoxRoles " href="content.php?i=cai_bang_phai#MainAccordin ">Cái Bang</a>, <a class="ABoxRoles " href="content.php?i=thien_nhan_giao#MainAccordin ">Thiên Nhẫn.</a></h3>
+                <p>Vị trí: Chính phái, Tà phái.</p>
+                <p>Người thuộc hành Hỏa là những người cường tráng, có sức mạnh tương đương với những người của hệ Kim, tu luyện nội công đặc thù đúng cách cũng có thể mang lại hiệu quả tốt.</p>
+            </div>
+            <div class="tDiv hide " style="display: none; ">
+                <h3>Môn phái theo đuổi: <a class="ABoxRoles " href="content.php?i=con_lon_phai#MainAccordin ">Côn Lôn</a>, <a class="ABoxRoles " href="content.php?i=vo_dang_phai#MainAccordin ">Võ Đang.</a></h3>
+                <p>Vị trí: Chính phái, Trung lập.</p>
+                <p>Người thuộc hành Thổ, trời sinh thông minh hơn người, xương cốt cứng cáp, thích hợp để tu luyện nội công. Thế nhưng bù lại, thể chất lại là yếu nhất trong tất cả những thuộc tính, sinh mạng tăng lên ít hơn so với những thuộc tính khác.</p>
+            </div>
+        </div>
     </div>
+    <!--   developer: bil4i3n, contact:: fb.com/bil.jx   -->
+    <!--   developer: bil4i3n, contact:: fb.com/bil.jx   -->
+    <div class="LichHoatDong ">
+        <div class="t ">
+            <div class="c ">LỊCH HOẠT ĐỘNG</div>
+        </div>
+        <div class="b ">
+            <div class="bt ">
+                <div class="bc ">Thứ 2</div>
+                <div class="bco ">Vượt ải<br>Tống kim<br>Săn nhím<br>Phong hỏa<br>Quả hoàng kim<br>Săn boss<br>Liên đấu<br>Công thành</div>
+            </div>
+            <div class="bt ">
+                <div class="bc ">Thứ 3</div>
+                <div class="bco ">Vượt ải<br>Tống kim<br>Săn nhím<br>Hoa sơn<br>Quả hoàng kim<br>Săn boss<br>Liên đấu<br>Công thành</div>
+            </div>
+            <div class="bt ">
+                <div class="bc ">Thứ 4</div>
+                <div class="bco ">Vượt ải<br>Tống kim<br>Săn nhím<br>Phong hỏa<br>Quả hoàng kim<br>Săn boss<br>Liên đấu<br>Công thành</div>
+            </div>
+            <div class="bt ">
+                <div class="bc ">Thứ 5</div>
+                <div class="bco ">Vượt ải<br>Tống kim<br>Săn nhím<br>Hoa sơn<br>Quả hoàng kim<br>Săn boss<br>Liên đấu<br>Công thành</div>
+            </div>
+            <div class="bt ">
+                <div class="bc ">Thứ 6</div>
+                <div class="bco ">Vượt ải<br>Tống kim<br>Săn nhím<br>Phong hỏa<br>Quả hoàng kim<br>Săn boss<br>Liên đấu<br>Công thành</div>
+            </div>
+            <div class="bt ">
+                <div class="bc ">Thứ 7</div>
+                <div class="bco ">Vượt ải<br>Tống kim<br>Săn nhím<br>Hoa sơn<br>Quả hoàng kim<br>Săn boss<br>Liên đấu<br>Công thành<br>Liên đấu</div>
+            </div>
+            <div class="bt ">
+                <div class="bc ">Chủ Nhật</div>
+                <div class="bco ">Vượt ải<br>Tống kim<br>Săn nhím<br>Phong hỏa<br>Quả hoàng kim<br>Săn boss<br>Liên đấu<br>Công thành<br>Liên đấu</div>
+            </div>
+        </div>
+    </div>
+    <!--   developer: bil4i3n, contact:: fb.com/bil.jx   -->
+    <!--   developer: bil4i3n, contact:: fb.com/bil.jx   -->
+    <div class="tinh-nang " style="visibility: visible; ">
+        <div class="ziliao ">
+            <div class="zl " id="zl-1 ">
+                <a href="news.php?tanthu=1#MainAccordin ">
+                    <img src="/include/web_skins/tisu/images/bg-nv-tintuc.jpg ">
+                    <span class="overTit01 "></span>
+                </a>
+                <div class="zl-con ">
+                    <h3>tân thủ</h3>
+                    <ul class="noi-dungnv ">
+                        <li><i></i><span><a style="color: #57617c; " href="content.php?i=download#MainAccordin ">Tải game, cài đặt</a></span></li>
+                        <li><i></i><span><a style="color: #57617c; " href="content.php?i=khoi_dong_auto_train#MainAccordin ">Khởi động Auto</a></span></li>
+                        <li><i></i><span><a style="color: #57617c; " href="content.php?i=chinh_che_do_mang_hinh#MainAccordin ">Chế độ màng hình</a></span></li>
+                        <li><i></i><span><a style="color: #57617c; " href="content.php?i=huong_dan_nguoi_choi_moi#MainAccordin ">Hệ thống giao diện</a></span></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="zl " id="zl-2 ">
+                <a href="news.php?features=1#MainAccordin ">
+                    <img src="/include/web_skins/tisu/images/bg-nv-tinhnang.jpg ">
+                    <span class="overTit02 "></span>
+                </a>
+                <div class="zl-con ">
+                    <h3>tính năng</h3>
+                    <ul class="noi-dungnv ">
+                        <li><i></i><span><a style="color: #57617c; " href="content.php?i=cong_thanh_chien_3_tru#MainAccordin ">Công thành chiến</a></span></li>
+                        <li><i></i><span><a style="color: #57617c; " href="content.php?i=phong_hoa_lien_thanh#MainAccordin ">Phong hỏa liên thành</a></span></li>
+                        <li><i></i><span><a style="color: #57617c; " href="content.php?i=phong_ky_toa_do#MainAccordin ">Phong kỳ tọa độ</a></span></li>
+                        <li><i></i><span><a style="color: #57617c; " href="content.php?i=hoa_son_dai_chien#MainAccordin ">Hoa sơn đại chiến</a></span></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="zl " id="zl-3 ">
+                <a href="news.php?activitys=1#MainAccordin ">
+                    <img src="/include/web_skins/tisu/images/bg-nv-nangcao.jpg ">
+                    <span class="overTit03 "></span>
+                </a>
+                <div class="zl-con ">
+                    <h3>hoạt động</h3>
+                    <ul class="noi-dungnv ">
+                        <li><i></i><span><a style="color: #57617c; " href="content.php?i=san_nhim_beo_phi#MainAccordin ">Săn nhím</a></span></li>
+                        <li><i></i><span><a style="color: #57617c; " href="content.php?i=boss_hoang_kim#MainAccordin ">Boss hoàng kim</a></span></li>
+                        <li><i></i><span><a style="color: #57617c; " href="content.php?i=vuot_ai_viem_de#MainAccordin ">Viêm đế</a></span></li>
+                        <li><i></i><span><a style="color: #57617c; " href="content.php?i=hoa_son_dai_chien#MainAccordin ">Hoa sơn</a></span></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="zl mrNo show " id="zl-4 ">
+                <a href="news.php?camnang=1#MainAccordin ">
+                    <img src="/include/web_skins/tisu/images/bg-nv-dacsac.jpg ">
+                    <span class="overTit04 "></span>
+                </a>
+                <div class="zl-con ">
+                    <h3>cẩm nang</h3>
+                    <ul class="noi-dungnv ">
+                        <li><i></i><span><a style="color: #57617c; " href="content.php?i=phuc_hoi_trang_bi#MainAccordin ">Phục hồi trang bị</a></span></li>
+                        <li><i></i><span><a style="color: #57617c; " href="content.php?i=he_thong_ngu_hanh_trang_bi#MainAccordin ">Hệ thống ngũ hành</a></span></li>
+                        <li><i></i><span><a style="color: #57617c; " href="content.php?i=diem_danh_hang_ngay#MainAccordin ">Điểm danh</a></span></li>
+                        <li><i></i><span><a style="color: #57617c; " href="content.php?i=nhan_thuong_theo_dang_cap#MainAccordin ">Thưởng đẳng cấp</a></span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--   developer: bil4i3n, contact:: fb.com/bil.jx   -->
 </div>

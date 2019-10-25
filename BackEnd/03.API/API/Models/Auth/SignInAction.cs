@@ -28,7 +28,7 @@ namespace API.Models.Auth
                 .Where("jz_acc.account.name", this.username)
                 .Where("jz_acc.account.password", this.password)
                 ;
-            return sql.Gets<User>();
+            return sql.Fetch<User>();
         }
         private Task<IEnumerable<User>> GetUserAuth(ObjectContext context,long acc_id)
         {

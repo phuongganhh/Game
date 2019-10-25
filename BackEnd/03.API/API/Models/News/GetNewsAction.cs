@@ -27,12 +27,12 @@ namespace API.Models
                 {
                     title = x.title.Decode(),
                     id = x.id,
-                    created_time = new DateTime(x.created_time.Value).ToString("dd-MM-yyyy HH:mm:ss")
+                    created_time = new DateTime(x.created_time.Value).ToString("dd-MM-yyyy")
                 };
             }),new Paging {
                 current_page = this.current_page,
                 page_size = this.page_size,
-                total = total
+                count = total.FirstOrDefault()?.count
             });
         }
         protected override Task ValidateCore(ObjectContext context)
@@ -41,10 +41,9 @@ namespace API.Models
             this.page_size = this.page_size ?? 16;
             return Task.CompletedTask;
         }
-        private Task<int> GetTotal(ObjectContext context)
+        private Task<IEnumerable<Paging>> GetTotal(ObjectContext context)
         {
-            var sql = $"SELECT COUNT(*) FROM news WHERE news.news_group_id = '{this.news_group_id}'";
-            return context.Connection.ExecuteScalarAsync<int>(sql);
+            return context.Query.From("news").AsCount().Where("news.news_group_id", this.news_group_id).Fetch<Paging>();
         }
         
     }

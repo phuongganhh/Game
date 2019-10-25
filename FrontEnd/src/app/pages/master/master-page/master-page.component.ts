@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef } from '@angular/core';
 
 @Component({
   selector: 'app-master-page',
@@ -6,10 +6,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./master-page.component.scss']
 })
 export class MasterPageComponent implements OnInit {
-
-  constructor() { }
+  
+  constructor(private elementRef:ElementRef) { }
 
   ngOnInit() {
+    console.log(this.elementRef.nativeElement.offsetHeight);
   }
 
 }

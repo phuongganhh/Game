@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { Result } from 'src/app/models/Result';
 import { User } from 'src/app/models/User';
-import { SignInData } from 'src/app/common/data';
 import { APIService } from '../api.service';
 import { MD5, ToParam } from 'src/app/common/hash';
 import { HttpClient, HttpHeaders } from '@angular/common/http';

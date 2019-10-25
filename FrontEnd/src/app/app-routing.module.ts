@@ -21,7 +21,7 @@ const routes: Routes = [
             component: NewsPageComponent
           },
           {
-            path: 'detail',
+            path: 'detail/:title/:id',
             component: NewsDetailComponent
           }
         ]

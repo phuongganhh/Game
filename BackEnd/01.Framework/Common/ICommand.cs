@@ -169,14 +169,14 @@ namespace Common
 
     public interface IPaging
     {
-        long? total { get; set; }
+        long? count { get; set; }
         long? current_page { get; set; }
         long? page_size { get; set; }
     }
 
     public class Paging : IPaging
     {
-        public long? total { get;set; }
+        public long? count { get;set; }
         public long? current_page { get;set; }
         public long? page_size { get;set; }
     }

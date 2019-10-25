@@ -12,5 +12,12 @@ namespace API.Controllers
         {
             return JsonExpando(await ActionCmd.Execute(CurrentObjectContext));
         }
+        [AllowAnonymous]
+        public async Task<ActionResult> GetDetail(GetNewsDetailAction ActionCmd)
+        {
+            return JsonExpando(await ActionCmd.Execute(CurrentObjectContext));
+        }
+
+
     }
 }

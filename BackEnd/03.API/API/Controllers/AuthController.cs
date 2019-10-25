@@ -12,6 +12,7 @@ namespace API.Controllers
     public class AuthController : BaseController
     {
         [HttpPost]
+        [AllowAnonymous]
         public async Task<ActionResult> SignIn(SignInAction ActionCmd)
         {
             return JsonExpando(await ActionCmd.Execute(CurrentObjectContext));

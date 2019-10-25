@@ -4,3 +4,9 @@ C:\Project\Game\BackEnd\02.Entity\Entity\obj\Release\Entity.csprojAssemblyRefere
 C:\Project\Game\BackEnd\02.Entity\Entity\obj\Release\Entity.csproj.CoreCompileInputs.cache
 C:\Project\Game\BackEnd\02.Entity\Entity\obj\Release\Entity.dll
 C:\Project\Game\BackEnd\02.Entity\Entity\obj\Release\Entity.pdb
+D:\Project\zo\Game\BackEnd\02.Entity\Entity\bin\Release\Entity.dll
+D:\Project\zo\Game\BackEnd\02.Entity\Entity\bin\Release\Entity.pdb
+D:\Project\zo\Game\BackEnd\02.Entity\Entity\obj\Release\Entity.csprojAssemblyReference.cache
+D:\Project\zo\Game\BackEnd\02.Entity\Entity\obj\Release\Entity.csproj.CoreCompileInputs.cache
+D:\Project\zo\Game\BackEnd\02.Entity\Entity\obj\Release\Entity.dll
+D:\Project\zo\Game\BackEnd\02.Entity\Entity\obj\Release\Entity.pdb

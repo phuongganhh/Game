@@ -124,12 +124,13 @@ namespace Common
         {
         }
         
-        protected Task<Result<T>> Success(T data, string message = "Success")
+        protected Task<Result<T>> Success(T data,IPaging paging = null, string message = "Success")
         {
             var r =  new Result<T>
             {
                 data = data,
-                message = message
+                message = message,
+                paging = paging
             };
             return Task.Run(() =>
             {

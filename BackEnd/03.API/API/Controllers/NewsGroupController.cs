@@ -8,6 +8,7 @@ namespace API.Controllers
     public class NewsGroupController : BaseController
     {
         [HttpGet]
+        [AllowAnonymous]
         public async Task<ActionResult> Get(GetNewsGroupAction ActionCmd)
         {
             return JsonExpando(await ActionCmd.Execute(CurrentObjectContext));

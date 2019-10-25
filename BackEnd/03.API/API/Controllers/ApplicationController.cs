@@ -11,7 +11,7 @@ namespace API.Controllers
 {
     public class ApplicationController : BaseController
     {
-        // GET: Application
+        [AllowAnonymous]
         public async Task<ActionResult> GetMenu(GetMenuAction ActionCmd)
         {
             return JsonExpando(await ActionCmd.Execute(CurrentObjectContext));

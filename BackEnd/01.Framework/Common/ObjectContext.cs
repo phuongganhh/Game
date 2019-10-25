@@ -1,4 +1,5 @@
 ﻿using Common.service;
+using Entity;
 using SqlKata.Compilers;
 using SqlKata.Execution;
 using System;
@@ -26,6 +27,8 @@ namespace Common
                 return MemoryCacheManager.Instance;
             }
         }
+
+        public User CurrentUser { get; set; }
         public string Token
         {
             get
@@ -53,7 +56,7 @@ namespace Common
         {
             get
             {
-                return new QueryFactory(this.Database.Connection, new MySqlCompiler());
+                return new QueryFactory(this.Connection, new MySqlCompiler());
             }
         }
         public DatabaseConnectService Database

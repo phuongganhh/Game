@@ -9,7 +9,7 @@
     </div>
     <div class="Content" *ngIf="news">
         <div *ngFor="let item of news"><a [routerLink]="[item.url]">{{item.title}}</a>
-            <p>{{item.created_date}}</p>
+            <p>{{item.created_time}}</p>
         </div>
     </div>
     <div class="Pages">

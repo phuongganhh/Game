@@ -1,7 +1,12 @@
-import { User } from '../models/User';
+import { Result } from '../models/Result';
 
-export let _user: User;
-
-export function SetUser(u: User){
-    this._user = u;
+export function Authen(result: Result<any>) : void{
+    switch(result.code){
+        case 401: 
+            window.location.href = '/';
+            break;
+        default:
+            alert(result.message);
+            break;
+    }
 }

@@ -7,10 +7,12 @@ using SqlKata.Compilers;
 using SqlKata.Execution;
 using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Data;
 using System.Data.Odbc;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -49,6 +51,30 @@ namespace Common.Database
         {
             return DatabaseConnectService.Instance.Connection.QueryAsync(sql.RawSql, sql.NamedBindings);
         }
+
+        public static IEnumerable<T> FetchData<T>(this Query query)
+        {
+            var sql = query.Complie();
+            using (var c = new WebClient())
+            {
+                var values = new NameValueCollection();
+                values["user"] = "test";
+                values["db"] = "pa";
+                values["password"] = "test";
+                values["host"] = "localhost";
+                values["q"] = sql.ToString();
+                if(!c.Headers.AllKeys.Any(x=> x.Equals("secret")))
+                {
+                    c.Headers.Add("secret", "6f555414cca6be3825f3d5fcb9f09220");
+                }
+                var response = c.UploadValues("http://103.27.237.153/auth/query.php", values);
+
+                var responseString = Encoding.Default.GetString(response);
+                return JsonConvert.DeserializeObject<IEnumerable<T>>(responseString);
+            }
+            
+        }
+
         public static async Task<IEnumerable<T>> Fetch<T>(this Query query)
         {
             var sql = query.Complie();

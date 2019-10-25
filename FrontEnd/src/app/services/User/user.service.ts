@@ -15,13 +15,9 @@ export class UserService {
 
   constructor(private api: APIService,private http:HttpClient) { }
   GetUser(): Observable<Result<User>>{
-    return of(SignInData);
+    return this.api.Get('/user/get');
   }
   SignIn(username: string,password:string) : Observable<Result<User>>{
-    // return this.http.post<Result<User>>(HOST + '/Auth/SignIn',ToParam({username,password: MD5(password)}),
-    // {
-    //   headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
-    // });
     return this.api.Post('/Auth/SignIn',{username,password: MD5(password)});
   }
 }

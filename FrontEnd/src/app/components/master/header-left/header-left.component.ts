@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/models/User';
 import { UserService } from 'src/app/services/User/user.service';
-import { _user } from 'src/app/common/common';
+import {  Authen } from 'src/app/common/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header-left',
@@ -11,12 +12,11 @@ import { _user } from 'src/app/common/common';
 export class HeaderLeftComponent implements OnInit {
 
   type: number = 1; //1 signin
-  user: User = _user;
+  user: User;
   username: string;
   password: string;
   email: string;
-  constructor(private _service: UserService) { }
-
+  constructor(private _service: UserService,private route: Router) { }
   ngOnInit() {
     if(this.user == null){
       this.type = 1;
@@ -37,6 +37,8 @@ export class HeaderLeftComponent implements OnInit {
     this.type = 1;
     this.username = '';
     this.password = '';
+    localStorage.removeItem('token');
+    this.route.navigate(['/']);
     //todo: clear cookie
   }
   SignIn(){
@@ -47,7 +49,7 @@ export class HeaderLeftComponent implements OnInit {
         localStorage.setItem('token',x.data.token);
       }
       else{
-        alert(x.message);
+        Authen(x);
       }
     });
   }

@@ -25,7 +25,6 @@ export class MenuComponent implements OnInit {
             this.menuRight.push(x.data[i]);
           }
         }
-        console.log(this);
       }
       else{
         alert(x.message);

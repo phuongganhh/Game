@@ -1,4 +1,5 @@
-﻿using System.Web;
+﻿using Common.Attribute;
+using System.Web;
 using System.Web.Mvc;
 
 namespace API
@@ -9,6 +10,7 @@ namespace API
         {
             filters.Add(new Cor());
             filters.Add(new HandleErrorAttribute());
+            filters.Add(new CustomAuthorizeAttribute());
         }
     }
 }

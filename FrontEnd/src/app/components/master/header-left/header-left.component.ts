@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/models/User';
 import { UserService } from 'src/app/services/User/user.service';
-import {  Authen } from 'src/app/common/common';
+import {  Authen, Noti } from 'src/app/common/common';
 import { Router } from '@angular/router';
+import { MD5 } from 'src/app/common/hash';
 
 @Component({
   selector: 'app-header-left',
@@ -18,6 +19,8 @@ export class HeaderLeftComponent implements OnInit {
   email: string;
   constructor(private _service: UserService,private route: Router) { }
   ngOnInit() {
+    this.username = '';
+    this.password = '';
     if(this.user == null){
       this.type = 1;
       this._service.GetUser().subscribe(x=> {
@@ -42,6 +45,14 @@ export class HeaderLeftComponent implements OnInit {
     //todo: clear cookie
   }
   SignIn(){
+    if(this.username.length < 4 || this.username.length > 12){
+      Noti("Tên tài khoản phải từ 4 đến 12 ký tự!");
+      return;
+    }
+    if(this.password.length < 4 || this.password.length > 12){
+      Noti("Mật khẩu quá ngắn");
+      return;
+    }
     this._service.SignIn(this.username,this.password).subscribe(x=>{
       if(x.code === 200){
         this.type = -1;
@@ -55,7 +66,27 @@ export class HeaderLeftComponent implements OnInit {
   }
 
   SignUp(){
-    console.log(this);
+    if(this.username.length < 4 || this.username.length > 12){
+      Noti("Tên tài khoản phải từ 4 đến 12 ký tự!");
+      return;
+    }
+    if(this.password.length < 4 || this.password.length > 12){
+      Noti("Mật khẩu quá ngắn");
+      return;
+    }
+
+    this._service.SignUp({
+      username : this.username,
+      password : MD5(this.password),
+      email : this.email
+    }).subscribe(result => {
+      Noti(result.message);
+      if(result.code === 200){
+        this.type = 1;
+        this.username = '';
+        this.password = '';
+      }
+    });
   }
 
   Forget(){

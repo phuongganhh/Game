@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Common.service;
+using System;
 using System.Net;
 using System.Threading.Tasks;
 
@@ -97,6 +98,7 @@ namespace Common
         {
             try
             {
+                DatabaseConnectService.Instance.Logger.Info("Test");
                 await ValidateCore(context);
                 await OnExecutingCore(context);
                 var result = await ExecuteCore(context);

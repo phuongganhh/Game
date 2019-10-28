@@ -6,7 +6,7 @@
             </ul>
             <span class="gz " [ngStyle]="{ 'width': '78px', 'left':(position * 78) + 'px'} " style="width: 78px; left: 156px; "></span>
         </div>
-        <div class="checkcon" *ngFor="let item of newsGroup" [ngStyle]="{'display': item.active ? 'block' : 'none'}">
+        <div class="checkcon" *ngFor="let item of newsGroup" [ngStyle]="{'display': item.active == true ? 'block' : 'none'}">
             <ul>
                 <li style="height:33px;" *ngFor="let n of item.news"><span>[{{n.created_time}}]</span><a [routerLink]="['/detail/abc/' + n.id]">{{n.title}}</a></li>
             </ul>
@@ -26,11 +26,11 @@
             <span class="gz " style="width: 62px; left: 0px; "></span>
         </div>
         <div class="peo ">
-            <div class="comPeo " style="right: 0px; display: block; "><img src="/include/web_skins/tisu/images/role01.png "></div>
-            <div class="comPeo hide " style="right: 0px; display: none; "><img src="/include/web_skins/tisu/images/role03.png "></div>
-            <div class="comPeo hide " style="right: 0px; display: none; "><img src="/include/web_skins/tisu/images/role02.png "></div>
-            <div class="comPeo hide " style="right: 0px; display: none; "><img src="/include/web_skins/tisu/images/role04.png "></div>
-            <div class="comPeo hide " style="right: 0px; display: none; "><img src="/include/web_skins/tisu/images/role05.png "></div>
+            <div class="comPeo " style="right: 0px; display: block; "><img src="http://jxbachu.com/include/web_skins/tisu/images/role01.png "></div>
+            <div class="comPeo hide " style="right: 0px; display: none; "><img src="http://jxbachu.com/include/web_skins/tisu/images/role03.png "></div>
+            <div class="comPeo hide " style="right: 0px; display: none; "><img src="http://jxbachu.com/include/web_skins/tisu/images/role02.png "></div>
+            <div class="comPeo hide " style="right: 0px; display: none; "><img src="http://jxbachu.com/include/web_skins/tisu/images/role04.png "></div>
+            <div class="comPeo hide " style="right: 0px; display: none; "><img src="http://jxbachu.com/include/web_skins/tisu/images/role05.png "></div>
         </div>
         <div class="rTxt " style="left: 30px; ">
             <div class="tDiv " style="display: block; height: 197px; ">
@@ -104,7 +104,7 @@
         <div class="ziliao ">
             <div class="zl " id="zl-1 ">
                 <a href="news.php?tanthu=1#MainAccordin ">
-                    <img src="/include/web_skins/tisu/images/bg-nv-tintuc.jpg ">
+                    <img src="http://jxbachu.com/include/web_skins/tisu/images/bg-nv-tintuc.jpg ">
                     <span class="overTit01 "></span>
                 </a>
                 <div class="zl-con ">
@@ -119,7 +119,7 @@
             </div>
             <div class="zl " id="zl-2 ">
                 <a href="news.php?features=1#MainAccordin ">
-                    <img src="/include/web_skins/tisu/images/bg-nv-tinhnang.jpg ">
+                    <img src="http://jxbachu.com/include/web_skins/tisu/images/bg-nv-tinhnang.jpg ">
                     <span class="overTit02 "></span>
                 </a>
                 <div class="zl-con ">
@@ -134,7 +134,7 @@
             </div>
             <div class="zl " id="zl-3 ">
                 <a href="news.php?activitys=1#MainAccordin ">
-                    <img src="/include/web_skins/tisu/images/bg-nv-nangcao.jpg ">
+                    <img src="http://jxbachu.com/include/web_skins/tisu/images/bg-nv-nangcao.jpg ">
                     <span class="overTit03 "></span>
                 </a>
                 <div class="zl-con ">
@@ -149,7 +149,7 @@
             </div>
             <div class="zl mrNo show " id="zl-4 ">
                 <a href="news.php?camnang=1#MainAccordin ">
-                    <img src="/include/web_skins/tisu/images/bg-nv-dacsac.jpg ">
+                    <img src="http://jxbachu.com/include/web_skins/tisu/images/bg-nv-dacsac.jpg ">
                     <span class="overTit04 "></span>
                 </a>
                 <div class="zl-con ">

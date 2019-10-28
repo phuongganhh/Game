@@ -21,6 +21,12 @@ namespace Common
             }
             
         }
+        public static string Encode(this string s)
+        {
+            string base64Decoded = "base64 encoded string";
+            byte[] data = System.Text.ASCIIEncoding.ASCII.GetBytes(base64Decoded);
+            return System.Convert.ToBase64String(data);
+        }
         public static string sha256(this string randomString)
         {
             var crypt = new System.Security.Cryptography.SHA256Managed();

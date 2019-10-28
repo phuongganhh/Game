@@ -10,3 +10,7 @@ export function Authen(result: Result<any>) : void{
             break;
     }
 }
+
+export function Noti(mess: string){
+    alert(mess);
+}

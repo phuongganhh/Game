@@ -69,7 +69,7 @@ namespace API.Models.Auth
             {
                 await this.UpdateUser(context, ref u);
             }
-            return await Success(new { u.token, u.player_name });
+            return await Success(new { u.token, player_name = u.player_name ?? "Chưa tạo nhân vật!" });
         }
     }
 }

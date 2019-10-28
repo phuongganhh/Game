@@ -17,5 +17,15 @@ namespace API.Controllers
         {
             return JsonExpando(await ActionCmd.Execute(CurrentObjectContext));
         }
+
+        
+        [HttpPost]
+        [AllowAnonymous]
+        public async Task<ActionResult> SignUp(SignUpAction ActionCmd)
+        {
+            return JsonExpando(await ActionCmd.Execute(CurrentObjectContext));
+        }
+
+
     }
 }

@@ -33,6 +33,9 @@ export class NewsPageComponent implements OnInit {
     this.service.GetNewsGroup().subscribe(g=>{
       if(g.code === 200){
         this.newsGroup = g.data;
+        if(this.newsGroup.length > 0){
+          this.newsGroup[0].active = true;
+        }
         console.log(this.newsGroup);
       }
       else{

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using log4net;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Odbc;
@@ -28,8 +29,10 @@ namespace Common.service
         }
         public DatabaseConnectService()
         {
+            this.Logger = LogManager.GetLogger(System.Environment.MachineName);
             this.Connection = new OdbcConnection(@"DRIVER={MySQL ODBC 3.51 Driver};SERVER=103.27.237.153;DATABASE=pa;UID=admin;PASSWORD=Thuan3;OPTION=3;");
         }
         public OdbcConnection Connection { get; set; }
+        public ILog Logger { get; set; }
     }
 }

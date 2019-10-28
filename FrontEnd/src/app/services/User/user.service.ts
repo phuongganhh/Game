@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { Result } from 'src/app/models/Result';
+import { Result, IResult } from 'src/app/models/Result';
 import { User } from 'src/app/models/User';
 import { APIService } from '../api.service';
 import { MD5, ToParam } from 'src/app/common/hash';
@@ -18,5 +18,9 @@ export class UserService {
   }
   SignIn(username: string,password:string) : Observable<Result<User>>{
     return this.api.Post('/Auth/SignIn',{username,password: MD5(password)});
+  }
+
+  SignUp(data: any) : Observable<IResult>{
+    return this.api.Post('/Auth/SignUp',data);
   }
 }

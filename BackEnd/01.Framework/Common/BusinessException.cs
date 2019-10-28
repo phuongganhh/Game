@@ -10,7 +10,7 @@ namespace Common
     public class BusinessException : SystemException
     {
         public HttpStatusCode exit_code { get; set; }
-        public BusinessException(string mess,HttpStatusCode Code = HttpStatusCode.InternalServerError) : base(mess)
+        public BusinessException(string mess,HttpStatusCode Code = HttpStatusCode.BadRequest) : base(mess)
         {
             this.exit_code = Code;
         }

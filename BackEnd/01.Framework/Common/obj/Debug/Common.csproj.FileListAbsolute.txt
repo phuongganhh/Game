@@ -298,3 +298,16 @@ D:\Project\zo\Game\BackEnd\01.Framework\Common\bin\Debug\Entity.pdb
 D:\Project\zo\Game\BackEnd\01.Framework\Common\bin\Debug\Dapper.FastCrud.xml
 C:\Project\Game\BackEnd\01.Framework\Common\bin\Debug\Entity.dll
 C:\Project\Game\BackEnd\01.Framework\Common\bin\Debug\Entity.pdb
+D:\Project\zo\Game\BackEnd\01.Framework\Common\bin\Debug\BouncyCastle.Crypto.dll
+D:\Project\zo\Game\BackEnd\01.Framework\Common\bin\Debug\MailKit.dll
+D:\Project\zo\Game\BackEnd\01.Framework\Common\bin\Debug\MimeKit.dll
+D:\Project\zo\Game\BackEnd\01.Framework\Common\bin\Debug\MailKit.xml
+D:\Project\zo\Game\BackEnd\01.Framework\Common\bin\Debug\MimeKit.xml
+D:\Project\zo\Game\BackEnd\01.Framework\Common\bin\Debug\log4net.dll
+D:\Project\zo\Game\BackEnd\01.Framework\Common\bin\Debug\System.Diagnostics.EventLog.dll
+D:\Project\zo\Game\BackEnd\01.Framework\Common\bin\Debug\System.Security.Principal.Windows.dll
+D:\Project\zo\Game\BackEnd\01.Framework\Common\bin\Debug\System.ServiceProcess.ServiceController.dll
+D:\Project\zo\Game\BackEnd\01.Framework\Common\bin\Debug\log4net.xml
+D:\Project\zo\Game\BackEnd\01.Framework\Common\bin\Debug\System.Diagnostics.EventLog.xml
+D:\Project\zo\Game\BackEnd\01.Framework\Common\bin\Debug\System.Security.Principal.Windows.xml
+D:\Project\zo\Game\BackEnd\01.Framework\Common\bin\Debug\System.ServiceProcess.ServiceController.xml

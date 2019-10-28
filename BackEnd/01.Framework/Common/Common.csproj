@@ -78,6 +78,7 @@
       <HintPath>..\..\packages\System.ComponentModel.Annotations.4.6.0\lib\net461\System.ComponentModel.Annotations.dll</HintPath>
     </Reference>
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Configuration.Install" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Odbc, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
@@ -155,6 +156,7 @@
     <Compile Include="Services\IService.cs" />
     <Compile Include="Services\ServiceSample.cs" />
     <Compile Include="service\DatabaseConnectService.cs" />
+    <Compile Include="Settings.cs" />
     <Compile Include="StringHepler\StringExtension.cs" />
   </ItemGroup>
   <ItemGroup>

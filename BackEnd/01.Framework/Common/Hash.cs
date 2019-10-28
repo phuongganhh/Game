@@ -23,8 +23,7 @@ namespace Common
         }
         public static string Encode(this string s)
         {
-            string base64Decoded = "base64 encoded string";
-            byte[] data = System.Text.ASCIIEncoding.ASCII.GetBytes(base64Decoded);
+            byte[] data = System.Text.UTF8Encoding.UTF8.GetBytes(s);
             return System.Convert.ToBase64String(data);
         }
         public static string sha256(this string randomString)

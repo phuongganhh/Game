@@ -17,6 +17,7 @@ import { FormsModule } from '@angular/forms';
 import { StoreModule } from '@ngrx/store';
 import { reducers, metaReducers } from './reducers';
 import { HttpClientModule } from '@angular/common/http';
+import { ValidatePageComponent } from './pages/master/validate-page/validate-page.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,7 +30,8 @@ import { HttpClientModule } from '@angular/common/http';
     NewsComponent,
     NewsPageComponent,
     MasterPageComponent,
-    NewsDetailComponent
+    NewsDetailComponent,
+    ValidatePageComponent
   ],
   imports: [
     BrowserModule,

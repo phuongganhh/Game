@@ -23,3 +23,5 @@
 /BackEnd/01.Framework/QueryBuilder/bin/Release
 /BackEnd/01.Framework/SqlKata.Execution/bin/Release
 /BackEnd/03.API/API/obj/Release
+/BackEnd/01.Framework/Common/obj/Debug
+/BackEnd/03.API/API/obj/Debug

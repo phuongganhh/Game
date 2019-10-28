@@ -25,6 +25,13 @@ namespace API.Controllers
         {
             return JsonExpando(await ActionCmd.Execute(CurrentObjectContext));
         }
+        
+        [HttpPost]
+        [AllowAnonymous]
+        public async Task<ActionResult> Validate(ValidateAction ActionCmd)
+        {
+            return JsonExpando(await ActionCmd.Execute(CurrentObjectContext));
+        }
 
 
     }

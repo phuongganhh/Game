@@ -130,6 +130,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\ApplicationController.cs" />
     <Compile Include="Controllers\AuthController.cs" />
+    <Compile Include="Controllers\BannerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\NewsController.cs" />
     <Compile Include="Controllers\NewsGroupController.cs" />
@@ -140,6 +141,8 @@
     <Compile Include="Models\Applicaiton\GetMenuAction.cs" />
     <Compile Include="Models\Auth\SignInAction.cs" />
     <Compile Include="Models\Auth\SignUpAction.cs" />
+    <Compile Include="Models\Auth\ValidateAction.cs" />
+    <Compile Include="Models\Banner\GetBannerAction.cs" />
     <Compile Include="Models\NewsGroup\GetNewsGroupAction.cs" />
     <Compile Include="Models\News\GetNewsAction.cs" />
     <Compile Include="Models\News\GetNewsDetailAction.cs" />
@@ -189,6 +192,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Views\Application\" />
     <Folder Include="Views\Auth\" />
+    <Folder Include="Views\Banner\" />
     <Folder Include="Views\NewsGroup\" />
     <Folder Include="Views\News\" />
     <Folder Include="Views\User\" />

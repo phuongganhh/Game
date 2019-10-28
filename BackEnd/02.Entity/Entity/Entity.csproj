@@ -46,6 +46,7 @@
     <Compile Include="Application.cs" />
     <Compile Include="Content.cs" />
     <Compile Include="File.cs" />
+    <Compile Include="Mail.cs" />
     <Compile Include="News.cs" />
     <Compile Include="NewsGroup.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

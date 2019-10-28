@@ -5,6 +5,8 @@ import { NewsPageComponent } from './pages/master/news-page/news-page.component'
 import { NewsComponent } from './components/master/news/news.component';
 import { MasterPageComponent } from './pages/master/master-page/master-page.component';
 import { NewsDetailComponent } from './pages/master/news-detail/news-detail.component';
+import { ValidatePageComponent } from './pages/master/validate-page/validate-page.component';
+import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 
 
 const routes: Routes = [
@@ -26,12 +28,18 @@ const routes: Routes = [
           }
         ]
       }
-    ]
+    ],
+    
+  },
+  {
+    path : 'validate/:token',
+    component: ValidatePageComponent
   }
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
+  providers: [{provide: LocationStrategy, useClass: HashLocationStrategy}],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

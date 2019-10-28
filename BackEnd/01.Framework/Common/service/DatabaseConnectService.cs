@@ -30,9 +30,14 @@ namespace Common.service
         public DatabaseConnectService()
         {
             this.Logger = LogManager.GetLogger(System.Environment.MachineName);
-            this.Connection = new OdbcConnection(@"DRIVER={MySQL ODBC 3.51 Driver};SERVER=103.27.237.153;DATABASE=pa;UID=admin;PASSWORD=Thuan3;OPTION=3;");
         }
-        public OdbcConnection Connection { get; set; }
+        public OdbcConnection Connection
+        {
+            get
+            {
+                return new OdbcConnection(@"DRIVER={MySQL ODBC 3.51 Driver};SERVER=103.27.237.153;DATABASE=pa;UID=admin;PASSWORD=Thuan3;OPTION=3;");
+            }
+        }
         public ILog Logger { get; set; }
     }
 }

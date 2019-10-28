@@ -23,4 +23,8 @@ export class UserService {
   SignUp(data: any) : Observable<IResult>{
     return this.api.Post('/Auth/SignUp',data);
   }
+
+  Validate(token: string) : Observable<IResult>{
+    return this.api.Post('/Auth/Validate',{token});
+  }
 }

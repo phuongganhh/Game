@@ -86,7 +86,11 @@ namespace API.Models.Auth
             });
             return context.Connection.ExecuteAsync(sql.RawSql, sql.NamedBindings);
         }
-
+        private Task InsertMailQueue(ObjectContext context,Mail mail)
+        {
+            var sql = context.Query.From("mail").Insert(mail);
+            return context.Connection.ExecuteAsync(sql.RawSql, sql.NamedBindings);
+        }
         protected override async Task<Result> ExecuteCore(ObjectContext context)
         {
             var acc = await this.GetAccount(context,this.username);
@@ -107,8 +111,15 @@ namespace API.Models.Auth
                 throw new Exception("Xảy ra lỗi không xác định! Mã lỗi: 900");
             }
             await this.InsertUser(context, u);
-            MailHelper.Insert.Send(this.email, "Xác thực tài khoản!", $"Xin chào {this.username}!{Environment.NewLine} Bấm vào <a href='#{u.token}'>đây</a> để xác thực tài khoản của bạn nhé!");
-            return await Success("Vui lòng kiểm tra hòm mail để xác thực tài khoản!");
+            await this.InsertMailQueue(context, new Mail
+            {
+                created_date = DateTime.Now,
+                sent = false,
+                sent_date = DateTime.Now,
+                email = this.email,
+                message = $"Hi {this.username}!{Environment.NewLine}Bấm vào <a href='{Settings.Instance.FontEnd}/Validate/{u.token}'></a> để xác thực tài khoản".Encode()
+            });
+            return await Success("Vui lòng kiểm tra hòm mail hoặc SPAM để xác thực tài khoản!");
         }
     }
 }

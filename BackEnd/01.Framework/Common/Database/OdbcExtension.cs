@@ -110,7 +110,14 @@ namespace Common.Database
 
             if (!client.DefaultRequestHeaders.Any(x => x.Key.Equals("secret")))
             {
-                client.DefaultRequestHeaders.Add("secret", "6f555414cca6be3825f3d5fcb9f09220");
+                try
+                {
+                    client.DefaultRequestHeaders.Add("secret", "6f555414cca6be3825f3d5fcb9f09220");
+                }
+                catch (Exception)
+                {
+
+                }
             }
             var content = new FormUrlEncodedContent(values);
 

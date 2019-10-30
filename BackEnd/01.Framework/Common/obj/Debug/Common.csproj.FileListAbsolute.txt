@@ -324,3 +324,7 @@ C:\Project\Game\BackEnd\01.Framework\Common\bin\Debug\MimeKit.xml
 C:\Project\Game\BackEnd\01.Framework\Common\bin\Debug\System.Diagnostics.EventLog.xml
 C:\Project\Game\BackEnd\01.Framework\Common\bin\Debug\System.Security.Principal.Windows.xml
 C:\Project\Game\BackEnd\01.Framework\Common\bin\Debug\System.ServiceProcess.ServiceController.xml
+C:\Project\Game\BackEnd\01.Framework\Common\bin\Debug\FluentEmail.dll
+C:\Project\Game\BackEnd\01.Framework\Common\bin\Debug\RazorEngine.dll
+C:\Project\Game\BackEnd\01.Framework\Common\bin\Debug\RazorEngine.pdb
+C:\Project\Game\BackEnd\01.Framework\Common\bin\Debug\RazorEngine.xml

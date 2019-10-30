@@ -51,6 +51,7 @@ namespace PA.Framework
                             using (var s = new T())
                             {
                                 s.DefaultStart();
+                                s.Start(Environment.GetCommandLineArgs());
                                 s.Dispose();
                             }
                             break;

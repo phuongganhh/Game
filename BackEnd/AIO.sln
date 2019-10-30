@@ -23,6 +23,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QueryBuilder", "01.Framewor
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SqlKata.Execution", "01.Framework\SqlKata.Execution\SqlKata.Execution.csproj", "{A3132773-4B4E-4B42-95A5-40B40DE68F0D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MailService", "04.Server\MailService\MailService.csproj", "{56188951-364C-4967-961C-B77120528E05}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -71,6 +73,14 @@ Global
 		{A3132773-4B4E-4B42-95A5-40B40DE68F0D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A3132773-4B4E-4B42-95A5-40B40DE68F0D}.Release|x86.ActiveCfg = Release|x86
 		{A3132773-4B4E-4B42-95A5-40B40DE68F0D}.Release|x86.Build.0 = Release|x86
+		{56188951-364C-4967-961C-B77120528E05}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{56188951-364C-4967-961C-B77120528E05}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{56188951-364C-4967-961C-B77120528E05}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{56188951-364C-4967-961C-B77120528E05}.Debug|x86.Build.0 = Debug|Any CPU
+		{56188951-364C-4967-961C-B77120528E05}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{56188951-364C-4967-961C-B77120528E05}.Release|Any CPU.Build.0 = Release|Any CPU
+		{56188951-364C-4967-961C-B77120528E05}.Release|x86.ActiveCfg = Release|Any CPU
+		{56188951-364C-4967-961C-B77120528E05}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -81,6 +91,7 @@ Global
 		{15724E58-0784-45F3-B6D0-A611223FABED} = {9A2BA0DE-C702-4860-A750-6ABA6DF4C352}
 		{D829051D-8322-420F-9AC3-A4CADCC4E568} = {9A2BA0DE-C702-4860-A750-6ABA6DF4C352}
 		{A3132773-4B4E-4B42-95A5-40B40DE68F0D} = {9A2BA0DE-C702-4860-A750-6ABA6DF4C352}
+		{56188951-364C-4967-961C-B77120528E05} = {35E07A7E-E012-4FC0-A0C2-2050B35FF13A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {63BB2F37-BAEB-416F-AE6B-3286B6003E9A}

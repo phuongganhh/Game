@@ -1,6 +1,8 @@
-﻿using MailKit.Net.Smtp;
-using MimeKit;
-using MimeKit.Utils;
+﻿
+using FluentEmail;
+using LF.Framework;
+using LF.Framework.MailManager;
+using System.Net.Mail;
 
 namespace Common
 {
@@ -11,8 +13,8 @@ namespace Common
 
         }
 
-        public static MailHelper _instance { get; set; }
-        public static MailHelper Insert
+        private static MailHelper _instance { get; set; }
+        public static MailHelper Instance
         {
             get
             {
@@ -22,26 +24,25 @@ namespace Common
 
         public void Send(string mailAddress,string title,string mess)
         {
-            var message = new MimeMessage();
-            message.From.Add(new MailboxAddress("Administrator Zero Online", "wars99.vietnam@gmail.com"));
-            message.To.Add(new MailboxAddress("Administrator Zero Online", mailAddress));
-            message.Subject = title;
-            message.MessageId = MimeUtils.GenerateMessageId("wars99.com");
-            message.Body = new TextPart("html")
+            MailOptions<SingleMailDto> options = new MailOptions<SingleMailDto>();
+            options.Data = new SingleMailDto();
+            options.Data.SenderEmail = "lebaonhi1998@gmail.com";
+            options.Data.Password = "Thuan2015";
+            options.Data.SenderName = "Admin Zero Online";
+            options.Data.ReceiverEmail = mailAddress;
+            options.Data.ReceiverName = "Nguoi choi zer online";
+            options.Data.Subject = title;
+            options.Data.Body = mess;
+            using (BaseSmtpClient client = SmtpClientCreator.GMail(options.Data.SenderEmail, options.Data.Password))
             {
-                Text = mess
-            };
-
-            using (var client = new SmtpClient())
-            {
-                // For demo-purposes, accept all SSL certificates (in case the server supports STARTTLS)
-                client.ServerCertificateValidationCallback = (s, c, h, e) => true;
-
-                client.Connect("smtp.gmail.com", 587, false);
-                // Note: only needed if the SMTP server requires authentication
-                client.Authenticate("wars99.vietnam@gmail.com", "abc@#$123456");
-                client.Send(message);
-                client.Disconnect(true);
+                var mail = new Email(client, options.Data.SenderEmail, options.Data.SenderName);
+                mail
+                    .To(options.Data.ReceiverEmail, options.Data.ReceiverName)
+                    .Subject(options.Data.Subject)
+                    .Body(options.Data.Body)
+                    .BodyAsHtml()
+                    .Send()
+                    ;
             }
         }
     }

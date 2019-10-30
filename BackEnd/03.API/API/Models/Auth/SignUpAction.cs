@@ -114,10 +114,10 @@ namespace API.Models.Auth
             await this.InsertMailQueue(context, new Mail
             {
                 created_date = DateTime.Now,
-                sent = false,
+                sent = 0,
                 sent_date = DateTime.Now,
                 email = this.email,
-                message = $"Hi {this.username}!{Environment.NewLine}Bấm vào <a href='{Settings.Instance.FontEnd}/Validate/{u.token}'></a> để xác thực tài khoản".Encode()
+                message = $"Hi {this.username}!{Environment.NewLine}Truy cập <b>{Settings.Instance.FontEnd}/Validate/{u.token}<b> để xác thực tài khoản".Encode()
             });
             return await Success("Vui lòng kiểm tra hòm mail hoặc SPAM để xác thực tài khoản!");
         }

@@ -376,9 +376,8 @@ C:\Project\Game\BackEnd\03.API\API\bin\System.Xml.XmlSerializer.dll
 C:\Project\Game\BackEnd\03.API\API\bin\System.Xml.XPath.dll
 C:\Project\Game\BackEnd\03.API\API\bin\System.Xml.XPath.XDocument.dll
 C:\Project\Game\BackEnd\03.API\API\bin\log4net.dll
-C:\Project\Game\BackEnd\03.API\API\bin\MimeKit.dll
-C:\Project\Game\BackEnd\03.API\API\bin\MailKit.dll
-C:\Project\Game\BackEnd\03.API\API\bin\BouncyCastle.Crypto.dll
 C:\Project\Game\BackEnd\03.API\API\bin\log4net.xml
-C:\Project\Game\BackEnd\03.API\API\bin\MimeKit.xml
-C:\Project\Game\BackEnd\03.API\API\bin\MailKit.xml
+C:\Project\Game\BackEnd\03.API\API\bin\FluentEmail.dll
+C:\Project\Game\BackEnd\03.API\API\bin\RazorEngine.dll
+C:\Project\Game\BackEnd\03.API\API\bin\RazorEngine.pdb
+C:\Project\Game\BackEnd\03.API\API\bin\RazorEngine.xml

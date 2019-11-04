@@ -1,16 +1,10 @@
-﻿using Common.service;
-using Dapper;
-using Dapper.FastCrud;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using SqlKata;
-using SqlKata.Compilers;
 using SqlKata.Execution;
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Data;
-using System.Data.Odbc;
-using System.Data.SqlClient;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -25,31 +19,32 @@ namespace Common.Database
         {
             return QueryHelper.CreateQueryFactory(query).Compiler.Compile(query);
         }
-        private static void Map(this OdbcParameterCollection param, IDictionary<string,object> dic)
-        {
-            foreach (KeyValuePair<string, Object> entry in dic)
-            {
-                param.AddWithValue(entry.Key, dic[entry.Key] ?? DBNull.Value);
-            }
-        }
         private static readonly HttpClient client = new HttpClient();
-        public static Task<IEnumerable<T>> Gets<T>(this Query query)
-        {
-            var sql = query.Complie();
 
-            return DatabaseConnectService.Instance.Connection.QueryAsync<T>(sql.RawSql, sql.NamedBindings);
-        }
-        public static Task<IEnumerable<T>> FindAsync<T>(this ObjectContext context)
+        public static int PostData(this SqlResult query)
         {
-            T data = default(T);
-            var t = data.GetType();
-            var initQuery = QueryFactory.Instance.From(t.Name);
-            var sql = initQuery.Complie();
-            return context.Connection.QueryAsync<T>(sql.RawSql, sql.NamedBindings);
-        }
-        public static Task Execute(this SqlResult sql)
-        {
-            return DatabaseConnectService.Instance.Connection.QueryAsync(sql.RawSql, sql.NamedBindings);
+            var sql = query;
+            using (var c = new WebClient())
+            {
+                var values = new NameValueCollection
+                {
+                    ["user"] = "test",
+                    ["db"] = "pa",
+                    ["password"] = "test",
+                    ["host"] = "localhost",
+                    ["q"] = sql.RawSql,
+                    ["param"] = JsonConvert.SerializeObject(sql.NamedBindings.Select(x => x.Value).ToArray())
+                };
+
+                if (!c.Headers.AllKeys.Any(x=> x.Equals("secret")))
+                {
+                    c.Headers.Add("secret", "6f555414cca6be3825f3d5fcb9f09220");
+                }
+                var response = c.UploadValues("http://103.27.237.153/auth/execute.php", values);
+
+                var responseString = Encoding.Default.GetString(response);
+                return Convert.ToInt32(responseString);
+            }
         }
 
         public static IEnumerable<T> FetchData<T>(this Query query)
@@ -57,25 +52,28 @@ namespace Common.Database
             var sql = query.Complie();
             using (var c = new WebClient())
             {
-                var values = new NameValueCollection();
-                values["user"] = "test";
-                values["db"] = "pa";
-                values["password"] = "test";
-                values["host"] = "localhost";
-                values["q"] = sql.ToString();
-                if(!c.Headers.AllKeys.Any(x=> x.Equals("secret")))
+                var values = new NameValueCollection
+                {
+                    ["user"] = "test",
+                    ["db"] = "pa",
+                    ["password"] = "test",
+                    ["host"] = "localhost",
+                    ["q"] = sql.RawSql,
+                    ["param"] = JsonConvert.SerializeObject(sql.NamedBindings.Select(x => x.Value).ToArray())
+                };
+
+                if (!c.Headers.AllKeys.Any(x=> x.Equals("secret")))
                 {
                     c.Headers.Add("secret", "6f555414cca6be3825f3d5fcb9f09220");
                 }
-                var response = c.UploadValues("http://103.27.237.153/auth/query.php", values);
+                var response = c.UploadValues("http://103.27.237.153/auth/fetch.php", values);
 
                 var responseString = Encoding.Default.GetString(response);
                 return JsonConvert.DeserializeObject<IEnumerable<T>>(responseString);
             }
-            
         }
 
-        public static async Task<IEnumerable<T>> Fetch<T>(this Query query)
+        public static async Task<IEnumerable<T>> FetchAsync<T>(this Query query)
         {
             var sql = query.Complie();
 
@@ -84,7 +82,8 @@ namespace Common.Database
             values["db"] = "pa";
             values["password"] = "test";
             values["host"] = "localhost";
-            values["q"] = sql.ToString();
+            values["q"] = sql.RawSql;
+            values["param"] = JsonConvert.SerializeObject(sql.NamedBindings.Select(x => x.Value).ToArray());
 
             if (!client.DefaultRequestHeaders.Any(x => x.Key.Equals("secret")))
             {
@@ -92,12 +91,12 @@ namespace Common.Database
             }
             var content = new FormUrlEncodedContent(values);
 
-            var response = await client.PostAsync("http://103.27.237.153/auth/query.php", content);
+            var response = await client.PostAsync("http://103.27.237.153/auth/fetch.php", content);
 
             var responseString = await response.Content.ReadAsStringAsync();
             return JsonConvert.DeserializeObject<IEnumerable<T>>(responseString);
         }
-        public static Task FetchAsync(this SqlResult query)
+        public static async Task<bool> ExecuteAsync(this SqlResult query)
         {
             var sql = query;
 
@@ -106,23 +105,20 @@ namespace Common.Database
             values["db"] = "pa";
             values["password"] = "test";
             values["host"] = "localhost";
-            values["q"] = sql.ToString();
+            values["q"] = sql.RawSql;
+            values["param"] = JsonConvert.SerializeObject(sql.NamedBindings.Select(x => x.Value).ToArray());
 
             if (!client.DefaultRequestHeaders.Any(x => x.Key.Equals("secret")))
             {
-                try
-                {
-                    client.DefaultRequestHeaders.Add("secret", "6f555414cca6be3825f3d5fcb9f09220");
-                }
-                catch (Exception)
-                {
-
-                }
+                client.DefaultRequestHeaders.Add("secret", "6f555414cca6be3825f3d5fcb9f09220");
             }
             var content = new FormUrlEncodedContent(values);
 
-            return client.PostAsync("http://103.27.237.153/auth/query.php", content);
+            var response = await client.PostAsync("http://103.27.237.153/auth/execute.php", content);
 
+            var responseString = await response.Content.ReadAsStringAsync();
+            var result =  JsonConvert.DeserializeObject<int>(responseString);
+            return result > 0;
         } 
     }
 }

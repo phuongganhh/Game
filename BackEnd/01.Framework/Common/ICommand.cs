@@ -1,5 +1,4 @@
-﻿using Common.service;
-using System;
+﻿using System;
 using System.Net;
 using System.Threading.Tasks;
 
@@ -42,6 +41,7 @@ namespace Common
             }
             catch (BusinessException ex)
             {
+                LoggerManager.Logger.Info(ex.Message);
                 return new Result
                 {
                     code = (int)ex.exit_code,
@@ -50,10 +50,11 @@ namespace Common
             }
             catch(Exception ex)
             {
+                LoggerManager.Logger.Error(ex, 500.ToString());
                 return new Result
                 {
                     code = (int)HttpStatusCode.InternalServerError,
-                    message = ex.Message
+                    message = "Đã xảy ra lỗi không xác định!"
                 };
             }
         }
@@ -98,7 +99,6 @@ namespace Common
         {
             try
             {
-                DatabaseConnectService.Instance.Logger.Info("Test");
                 await ValidateCore(context);
                 await OnExecutingCore(context);
                 var result = await ExecuteCore(context);
@@ -107,6 +107,7 @@ namespace Common
             }
             catch (BusinessException ex)
             {
+                LoggerManager.Logger.Info(ex.Message);
                 return new Result<T>
                 {
                     code = (int)ex.exit_code,
@@ -115,10 +116,11 @@ namespace Common
             }
             catch (Exception ex)
             {
+                LoggerManager.Logger.Error(ex,500.ToString());
                 return new Result<T>
                 {
                     code = (int)HttpStatusCode.InternalServerError,
-                    message = ex.Message
+                    message = "Đã xảy ra lỗi không xác định!"
                 };
             }
         }

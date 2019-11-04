@@ -20,7 +20,7 @@ namespace API.Models
         public long? news_group_id { get; set; }
         protected override async Task<Result<IEnumerable<dynamic>>> ExecuteCore(ObjectContext context)
         {
-            var data = await context.Query.From("news").Where("news.news_group_id", this.news_group_id).ForPage(this.current_page.Value,this.page_size.Value).Fetch<News>();
+            var data = await context.Query.From("news").Where("news.news_group_id", this.news_group_id).ForPage(this.current_page.Value,this.page_size.Value).FetchAsync<News>();
             var total = await this.GetTotal(context);
             return await Success(data.Select(x=> {
                 return new
@@ -43,7 +43,7 @@ namespace API.Models
         }
         private Task<IEnumerable<Paging>> GetTotal(ObjectContext context)
         {
-            return context.Query.From("news").AsCount().Where("news.news_group_id", this.news_group_id).Fetch<Paging>();
+            return context.Query.From("news").AsCount().Where("news.news_group_id", this.news_group_id).FetchAsync<Paging>();
         }
         
     }

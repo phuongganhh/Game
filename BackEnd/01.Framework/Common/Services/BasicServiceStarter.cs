@@ -1,4 +1,5 @@
-﻿using Common.Services;
+﻿using Common;
+using Common.Services;
 using System;
 using System.Diagnostics;
 using System.IO;
@@ -16,22 +17,13 @@ namespace PA.Framework
         {
             try
             {
-                AppDomain.CurrentDomain.UnhandledException += (s, e) =>
-                {
-                    if (EventLog.SourceExists(serviceName))
-                    {
-                        EventLog.WriteEntry(serviceName,
-                            "Fatal Exception : " + Environment.NewLine +
-                            e.ExceptionObject, EventLogEntryType.Error);
-                    }
-                };
 
                 if (Environment.UserInteractive)
                 {
                     var cmd = Environment.GetCommandLineArgs()
                         .Skip(1)
                         .FirstOrDefault()
-                        .ToLower();
+                        ?.ToLower();
                     switch (cmd)
                     {
                         case "pai":
@@ -39,10 +31,11 @@ namespace PA.Framework
                             ServiceController service = new ServiceController(serviceName);
                             service.Start();
                             service.WaitForStatus(ServiceControllerStatus.Running);
-                            using(var s = new T())
+                            using (var s = new T())
                             {
-                                s.DefaultStart();
+                                s.Start(Environment.GetCommandLineArgs());
                             }
+                            Console.WriteLine("Done");
                             break;
                         case "pa-u":
                             BasicServiceInstaller.Uninstall(serviceName);
@@ -50,9 +43,7 @@ namespace PA.Framework
                         default:
                             using (var s = new T())
                             {
-                                s.DefaultStart();
                                 s.Start(Environment.GetCommandLineArgs());
-                                s.Dispose();
                             }
                             break;
                     }
@@ -64,11 +55,7 @@ namespace PA.Framework
             }
             catch (Exception ex)
             {
-                using (var w = new StreamWriter("ZeroEye.log"))
-                {
-                    w.WriteLine($"{DateTime.Now.ToString("dd-MM-yyyy HH:mm:ss")} : {ex.Message}");
-                }
-                Environment.Exit(1);
+                LoggerManager.Logger.Error($"Mail: {ex.Message}");
             }
             
         }

@@ -25,3 +25,6 @@
 /BackEnd/03.API/API/obj/Release
 /BackEnd/01.Framework/Common/obj/Debug
 /BackEnd/03.API/API/obj/Debug
+/BackEnd/04.Server/SendMail/bin/Debug
+/BackEnd/04.Server/SendMail/obj/Debug
+/BackEnd/04.Server/SendMailService

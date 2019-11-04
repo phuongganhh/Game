@@ -1,13 +1,9 @@
 ﻿using Common.Database;
-using Common.service;
 using Entity;
 using SqlKata.Execution;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 using System.Web.Mvc;
 
 namespace Common.Attribute
@@ -39,7 +35,8 @@ namespace Common.Attribute
                     };
                     return;
                 }
-                var u = QueryFactory.Instance
+                var objectContext = new ObjectContext();
+                var u = objectContext.Query
                     .From("pa.user")
                     .LeftJoin("jz.cq_user","jz.cq_user.id","pa.user.player_id")
                     .Select("jz.cq_user.name as player_name","pa.user.token")

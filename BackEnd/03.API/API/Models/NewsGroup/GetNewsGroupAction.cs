@@ -13,11 +13,11 @@ namespace API.Models
     {
         private Task<IEnumerable<NewsGroup>> GetNewsGroups(ObjectContext context)
         {
-            return context.Query.From("news_group").Fetch<NewsGroup>();
+            return context.Query.From("news_group").FetchAsync<NewsGroup>();
         }
         private Task<IEnumerable<News>> GetNews(ObjectContext context,NewsGroup newsGroup)
         {
-            return context.Query.From("news").Where("news.news_group_id", newsGroup.id).Fetch<News>();
+            return context.Query.From("news").Where("news.news_group_id", newsGroup.id).FetchAsync<News>();
         }
         protected override async Task<Result<IEnumerable<dynamic>>> ExecuteCore(ObjectContext context)
         {

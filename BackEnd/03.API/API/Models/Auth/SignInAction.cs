@@ -28,11 +28,11 @@ namespace API.Models.Auth
                 .Where("jz_acc.account.name", this.username)
                 .Where("jz_acc.account.password", this.password)
                 ;
-            return sql.Fetch<User>();
+            return sql.FetchAsync<User>();
         }
         private Task<IEnumerable<User>> GetUserAuth(ObjectContext context,long acc_id)
         {
-            return context.Query.From("user").Where("user.id", acc_id).Fetch<User>();
+            return context.Query.From("user").Where("user.id", acc_id).FetchAsync<User>();
         }
         private Task InsertUser(ObjectContext context,ref User user)
         {
@@ -44,14 +44,14 @@ namespace API.Models.Auth
                 function_group_id = 0,
                 spin_count = 0,
                 money = 0
-            }).FetchAsync();
+            }).ExecuteAsync();
         }
         private Task UpdateUser(ObjectContext context,ref User user)
         {
             return context.Query.From("pa.user").Where("pa.user.id",user.id).Update(new
             {
                 token = user.token
-            }).FetchAsync();
+            }).ExecuteAsync();
         }
         protected override async Task<Result<dynamic>> ExecuteCore(ObjectContext context)
         {

@@ -26,11 +26,12 @@ namespace API.Controllers
             return JsonExpando(await ActionCmd.Execute(CurrentObjectContext));
         }
         
-        [HttpPost]
+        [HttpGet]
         [AllowAnonymous]
         public async Task<ActionResult> Validate(ValidateAction ActionCmd)
         {
-            return JsonExpando(await ActionCmd.Execute(CurrentObjectContext));
+            await ActionCmd.Execute(CurrentObjectContext);
+            return Redirect(Settings.Instance.FontEnd);
         }
 
 

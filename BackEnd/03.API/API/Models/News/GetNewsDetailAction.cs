@@ -20,7 +20,7 @@ namespace API.Models
                 .LeftJoin("content","content.id","news.id")
                 .Select("news.title","news.height","content.content_html")
                 .Where("news.id", this.id)
-                .Fetch<News>()
+                .FetchAsync<News>()
                 ;
             var result = contents.FirstOrDefault();
             return await Success(new

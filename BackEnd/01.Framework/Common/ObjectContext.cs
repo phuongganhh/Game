@@ -1,11 +1,8 @@
-﻿using Common.service;
-using Entity;
+﻿using Entity;
 using SqlKata.Compilers;
 using SqlKata.Execution;
 using System;
-using System.Data;
 using System.Data.Odbc;
-using System.Data.SqlClient;
 using System.Globalization;
 using System.Linq;
 using System.Net;
@@ -56,21 +53,7 @@ namespace Common
         {
             get
             {
-                return new QueryFactory(this.Connection, new MySqlCompiler());
-            }
-        }
-        public DatabaseConnectService Database
-        {
-            get
-            {
-                return DatabaseConnectService.Instance;
-            }
-        }
-        public IDbConnection Connection
-        {
-            get
-            {
-                return DatabaseConnectService.Instance.Connection;
+                return new QueryFactory(new OdbcConnection(), new MySqlCompiler());
             }
         }
         public static ObjectContext CreateContext(Controller controller, bool isAdmin = false)
@@ -85,6 +68,10 @@ namespace Common
         {
             _controller = controller;
             //_repo = ServiceLocator.Current.GetInstance<IDbInfoRepository>();
+        }
+        public ObjectContext()
+        {
+
         }
 
         private HttpContextBase Context { get { return _controller.HttpContext; } }

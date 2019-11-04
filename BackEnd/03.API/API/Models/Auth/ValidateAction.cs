@@ -2,6 +2,7 @@
 using Common.Database;
 using Dapper;
 using Entity;
+using Newtonsoft.Json;
 using SqlKata.Execution;
 using System;
 using System.Collections.Generic;
@@ -28,19 +29,24 @@ namespace API.Models.Auth
                 .From("user")
                 .Where("user.token", this.token)
                 .Select("pa.user.token","pa.user.id")
-                .Fetch<User>()
+                .FetchAsync<User>()
                 ;
         }
-        private Task UpdateAccount(ObjectContext context,User u)
+        private async Task UpdateAccount(ObjectContext context,User u)
         {
-            var sql =  context.Query
+            var result = await context.Query
                 .From("jz_acc.account")
                 .Where("jz_acc.account.id", u.id)
-                .Update(new {
+                .Update(new
+                {
                     online = 0,
                     reg_date = DateTime.Now
-                });
-            return context.Connection.ExecuteAsync(sql.RawSql, sql.NamedBindings);
+                }).ExecuteAsync();
+            if (!result)
+            {
+                LoggerManager.Logger.Error("903: Không thể update tài khoản - " + JsonConvert.SerializeObject(u));
+                throw new BusinessException("Đã xảy ra lỗi: 903",System.Net.HttpStatusCode.InternalServerError);
+            }
         }
         protected override async Task<Result> ExecuteCore(ObjectContext context)
         {

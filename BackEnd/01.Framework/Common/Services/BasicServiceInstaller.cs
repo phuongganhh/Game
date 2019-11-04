@@ -50,17 +50,12 @@ namespace PA.Framework
             {
                 ServiceName = serviceName,
                 DisplayName = serviceName,
-                StartType = ServiceStartMode.Manual
+                StartType = ServiceStartMode.Automatic
             });
             installer.Installers.Add(new ServiceProcessInstaller
             {
                 Account = ServiceAccount.LocalSystem
             });
-            var installContext = new InstallContext(
-                serviceName + ".install.log", null);
-            installContext.Parameters["assemblypath"] =
-                Assembly.GetEntryAssembly().Location;
-            installer.Context = installContext;
             return installer;
         }
     }

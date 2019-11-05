@@ -34,6 +34,12 @@
     <Reference Include="BouncyCastle.Crypto, Version=1.8.5.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
       <HintPath>..\..\packages\BouncyCastle.1.8.5\lib\BouncyCastle.Crypto.dll</HintPath>
     </Reference>
+    <Reference Include="Dapper, Version=1.50.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Dapper.1.50.2\lib\net451\Dapper.dll</HintPath>
+    </Reference>
+    <Reference Include="Dapper.FastCrud, Version=2.5.0.39, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Dapper.FastCrud.2.5.0.39\lib\net46\Dapper.FastCrud.dll</HintPath>
+    </Reference>
     <Reference Include="FluentEmail, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\fluent-email.1.5\lib\net40\FluentEmail.dll</HintPath>
     </Reference>
@@ -202,6 +208,7 @@
     <Compile Include="Caching\MemoryCacheManager.cs" />
     <Compile Include="Caching\SessionCacheManager.cs" />
     <Compile Include="Controller\BaseController.cs" />
+    <Compile Include="Database\DatabaseConnectService.cs" />
     <Compile Include="Database\OdbcExtension.cs" />
     <Compile Include="Hash.cs" />
     <Compile Include="ICommand.cs" />

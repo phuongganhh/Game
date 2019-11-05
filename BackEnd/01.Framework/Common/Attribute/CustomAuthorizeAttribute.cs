@@ -1,5 +1,8 @@
 ﻿using Common.Database;
+using Dapper;
+using Dapper.FastCrud;
 using Entity;
+using Models;
 using SqlKata.Execution;
 using System;
 using System.Linq;
@@ -36,13 +39,8 @@ namespace Common.Attribute
                     return;
                 }
                 var objectContext = new ObjectContext();
-                var u = objectContext.Query
-                    .From("pa.user")
-                    .LeftJoin("jz.cq_user","jz.cq_user.id","pa.user.player_id")
-                    .Select("jz.cq_user.name as player_name","pa.user.token")
-                    .Where("token", token)
-                    .FetchData<User>()
-                    ;
+                var u = objectContext.Connection
+                    .Find<User>(s => s.Where($"Token = @token").WithParameters(new { token }));
                 if (!u.Any() || u.Count() > 1)
                 {
                     filterContext.Result = new JsonResult()

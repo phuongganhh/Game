@@ -2,7 +2,9 @@
 using Common.Database;
 using Common.StringHepler;
 using Dapper;
+using Dapper.FastCrud;
 using Entity;
+using Models;
 using SqlKata.Execution;
 using System;
 using System.Collections.Generic;
@@ -19,19 +21,15 @@ namespace API.Models.Auth
         public string email { get; set; }
         private Task<IEnumerable<User>> GetAccount(ObjectContext context,string username)
         {
-            return context.Query.From("jz_acc.account")
-                .Select("jz_acc.account.name","jz_acc.account.id")
-                .Where("jz_acc.account.name", username)
-                .FetchAsync<User>()
-                ;
+            return context.Connection.FindAsync<User>(s => s.Where($"Username = @username").WithParameters(new { username }));
+        }
+        private Task<IEnumerable<jzAccount>> GetUser(ObjectContext context,string username)
+        {
+            return context.Query.From("jz_acc.account").Where("jz_acc.account.name", username).FetchAsync<jzAccount>();
         }
         private Task<IEnumerable<User>> GetEmail(ObjectContext context)
         {
-            return context.Query.From("pa.user")
-                .Select("pa.user.email")
-                .Where("pa.user.email", this.email)
-                .FetchAsync<User>()
-                ;
+            return context.Connection.FindAsync<User>(s => s.Where($"Email = @email").WithParameters(new { this.email }));
         }
         protected override Task ValidateCore(ObjectContext context)
         {
@@ -59,83 +57,72 @@ namespace API.Models.Auth
             }
             return Task.CompletedTask;
         }
-        private async Task<bool> InsertAccount(ObjectContext context)
+        private async Task InsertAccount(ObjectContext context)
         {
-            var result = await context.Query.From("jz_acc.account").Insert(new
+            var sql = context.Query.From("jz_acc.account").Insert(new
             {
                 name = this.username.TrimSpace().ToLower(),
                 password = this.password,
                 online = 1,
                 VIP = 1
-            }).ExecuteAsync();
-            if(!result)
+            });
+            var result = await sql.ExecuteNotResult(context.ConnectionAccount);
+            if (result <= 0)
             {
-                LoggerManager.Logger.Error($"900: Không thể đăng ký tài khoản! - ${this.username}");
+                LoggerManager.Logger.Error($"900: Không thể đăng ký tài khoản! - ${sql.ToString()}");
                 this.Failed(900);
             }
-            return result;
         }
         private void Failed(int error_code)
         {
             throw new BusinessException("Đã xả ra lỗi: " + error_code,HttpStatusCode.InternalServerError);
         }
-        private async Task<bool> InsertUser(ObjectContext context,User user)
+        private Task InsertUser(ObjectContext context,User user)
         {
-            user.token = context.Token;
-            user.email = this.email;
-            var result = await context.Query.From("pa.user").Insert(new
-            {
-                user.id,
-                user.token,
-                user.email,
-                user.function_group_id,
-                user.spin_count,
-                user.money
-            }).ExecuteAsync();
-            if (!result)
-            {
-                LoggerManager.Logger.Error("901: Không thể đăng ký pa.user - " + this.username);
-                this.Failed(901);
-            }
-            return result;
+            return context.Connection.InsertAsync(user);
         }
-        private async Task<bool> InsertMailQueue(ObjectContext context,Mail mail)
+        private Task InsertMailQueue(ObjectContext context,Mail mail)
         {
-            var result = await context.Query.From("mail").Insert(mail).ExecuteAsync();
-            if (!result)
-            {
-                LoggerManager.Logger.Error("902: Không thể thêm email - " + this.email);
-                this.Failed(902);
-            }
-            return result;
+            return context.Connection.InsertAsync(mail);
         }
         protected override async Task<Result> ExecuteCore(ObjectContext context)
         {
             var acc = await this.GetAccount(context,this.username);
-            if(acc.Count() > 0)
+            if(acc.Any())
             {
                 throw new BusinessException("Tài khoản này đã có người sử dụng");
             }
             var email = await this.GetEmail(context);
-            if(email.Count() > 0)
+            if(email.Any())
             {
                 throw new BusinessException("Email này đã có người sử dụng");
             }
-             await this.InsertAccount(context);
-            var accountInsert = await this.GetAccount(context,this.username);
+            await this.InsertAccount(context);
+            var accountInsert = await this.GetUser(context,this.username);
             var u = accountInsert.FirstOrDefault();
             if (u == null)
             {
-                throw new Exception("Xảy ra lỗi không xác định! Mã lỗi: 900");
+                throw new Exception("Không tìm thấy tài khoản! Mã lỗi: 900");
             }
-            await this.InsertUser(context, u);
+            var userCurrent = new User
+            {
+                Username = this.username,
+                Id = u.id,
+                Money = 0,
+                Email = this.email,
+                Password = this.password,
+                Spin = 0,
+                Token = context.Token,
+                FunctionGroupId = 1
+            };
+            await this.InsertUser(context, userCurrent);
             await this.InsertMailQueue(context, new Mail
             {
-                created_date = DateTime.Now,
-                sent = 0,
-                sent_date = DateTime.Now,
-                email = this.email,
-                message = $"Hi {this.username}!{Environment.NewLine}Truy cập <b>http://103.27.237.153:82/auth/validate?token={u.token}<b> để xác thực tài khoản".Encode()
+                CreatedDate = DateTime.Now,
+                Sent = false,
+                SentDate = DateTime.Now,
+                Email = this.email,
+                Message = $"Hi {this.username}!{Environment.NewLine}Truy cập <b>http://103.27.237.153:82/auth/validate?token={userCurrent.Token}<b> để xác thực tài khoản"
             });
             return await Success("Vui lòng kiểm tra hòm mail hoặc SPAM để xác thực tài khoản!");
         }

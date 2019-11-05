@@ -12,13 +12,9 @@ namespace API.Models
     {
         protected override Task<Result<dynamic>> ExecuteCore(ObjectContext context)
         {
-            if(context.CurrentUser == null)
-            {
-                throw new BusinessException("Vui lòng đăng nhập!", HttpStatusCode.Unauthorized);
-            }
             return Success(new
             {
-                player_name = context.CurrentUser.player_name
+                player_name = context.CurrentUser.CharacterName ?? context.CurrentUser.Username
             });
         }
     }

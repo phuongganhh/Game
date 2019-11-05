@@ -50,7 +50,7 @@ namespace Common
             }
             catch(Exception ex)
             {
-                LoggerManager.Logger.Error(ex, 500.ToString());
+                LoggerManager.Logger.Error(ex.Message);
                 return new Result
                 {
                     code = (int)HttpStatusCode.InternalServerError,

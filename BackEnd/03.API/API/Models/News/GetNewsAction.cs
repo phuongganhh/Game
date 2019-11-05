@@ -4,6 +4,7 @@ using Common.Framework;
 using Dapper;
 using Dapper.FastCrud;
 using Entity;
+using Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,19 +21,20 @@ namespace API.Models
         public long? news_group_id { get; set; }
         protected override async Task<Result<IEnumerable<dynamic>>> ExecuteCore(ObjectContext context)
         {
-            var data = await context.Query.From("news").Where("news.news_group_id", this.news_group_id).ForPage(this.current_page.Value,this.page_size.Value).FetchAsync<News>();
+            var data = await context.Connection
+                .FindAsync<News>(s => s.Skip((this.current_page - 1) * this.page_size).Top(this.page_size));
             var total = await this.GetTotal(context);
             return await Success(data.Select(x=> {
                 return new
                 {
-                    title = x.title.Decode(),
-                    id = x.id,
-                    created_time = new DateTime(x.created_time.Value).ToString("dd-MM-yyyy")
+                    title = x.Title,
+                    id = x.Id,
+                    created_time = x.CreatedDate.Value.ToString("dd-MM-yyyy")
                 };
             }),new Paging {
                 current_page = this.current_page,
                 page_size = this.page_size,
-                count = total.FirstOrDefault()?.count
+                count = total
             });
         }
         protected override Task ValidateCore(ObjectContext context)
@@ -41,9 +43,9 @@ namespace API.Models
             this.page_size = this.page_size ?? 16;
             return Task.CompletedTask;
         }
-        private Task<IEnumerable<Paging>> GetTotal(ObjectContext context)
+        private Task<int> GetTotal(ObjectContext context)
         {
-            return context.Query.From("news").AsCount().Where("news.news_group_id", this.news_group_id).FetchAsync<Paging>();
+            return context.Connection.CountAsync<News>(s => s.Where($"NewsGroupId = @id").WithParameters(new { id = this.news_group_id }));
         }
         
     }

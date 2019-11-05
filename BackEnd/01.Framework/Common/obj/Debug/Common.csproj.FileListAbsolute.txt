@@ -362,3 +362,7 @@ C:\Project\Game\BackEnd\01.Framework\Common\bin\Debug\Microsoft.Net.Http.Headers
 C:\Project\Game\BackEnd\01.Framework\Common\bin\Debug\NLog.Extensions.Logging.xml
 C:\Project\Game\BackEnd\01.Framework\Common\bin\Debug\NLog.Web.AspNetCore.xml
 C:\Project\Game\BackEnd\01.Framework\Common\bin\Debug\System.Text.Encodings.Web.xml
+C:\Project\Game\BackEnd\01.Framework\Common\bin\Debug\Dapper.FastCrud.dll
+C:\Project\Game\BackEnd\01.Framework\Common\bin\Debug\Entity.dll.config
+C:\Project\Game\BackEnd\01.Framework\Common\bin\Debug\Dapper.xml
+C:\Project\Game\BackEnd\01.Framework\Common\bin\Debug\Dapper.FastCrud.xml

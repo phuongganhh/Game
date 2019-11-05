@@ -1,11 +1,11 @@
 ﻿using Common;
 using Common.Database;
-using Entity;
+using Dapper.FastCrud;
+using Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Web;
 
 namespace API.Models
 {
@@ -13,30 +13,25 @@ namespace API.Models
     {
         private Task<IEnumerable<Application>> GetApplications(ObjectContext context)
         {
-            return context.Query.From("application").FetchAsync<Application>();
+            return context.Connection.FindAsync<Application>();
         }
         private async Task<IEnumerable<dynamic>> GetData(ObjectContext context)
         {
             var app = await this.GetApplications(context);
-            var result = app.Where(x => x.parent_id == null);
-            foreach (var item in result)
-            {
-                item.Childrent = app.Where(x => x.parent_id.Equals(item.id));
-            }
-            return result.Select(x =>
+            return app.Select(x =>
             {
                 return new
                 {
-                    name = x.name.Decode(),
-                    url = x.url ?? "#",
-                    style = x.style.Decode(),
-                    childrent = x.Childrent?.Select(c =>
+                    name = x.Name,
+                    url = x.Url ?? "#",
+                    style = x.Style,
+                    childrent = app.Where(a => a.ParentId == x.Id).Select(c =>
                     {
                         return new
                         {
-                            name = c.name.Decode(),
-                            url = c.url ?? "#",
-                            style = x.style.Decode()
+                            name = c.Name,
+                            url = c.Url ?? "#",
+                            style = x.Style
                         };
                     })
                 };

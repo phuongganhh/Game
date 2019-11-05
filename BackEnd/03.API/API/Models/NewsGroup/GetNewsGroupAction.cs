@@ -1,6 +1,8 @@
 ﻿using Common;
 using Common.Database;
+using Dapper.FastCrud;
 using Entity;
+using Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,34 +15,27 @@ namespace API.Models
     {
         private Task<IEnumerable<NewsGroup>> GetNewsGroups(ObjectContext context)
         {
-            return context.Query.From("news_group").FetchAsync<NewsGroup>();
-        }
-        private Task<IEnumerable<News>> GetNews(ObjectContext context,NewsGroup newsGroup)
-        {
-            return context.Query.From("news").Where("news.news_group_id", newsGroup.id).FetchAsync<News>();
+            return context.Connection.FindAsync<NewsGroup>(s=>s.Include<News>());
         }
         protected override async Task<Result<IEnumerable<dynamic>>> ExecuteCore(ObjectContext context)
         {
             var group = await this.GetNewsGroups(context);
-            var dem = 0;
-            foreach (var item in group)
-            {
-                item.News = await this.GetNews(context, item);
-            }
+            
             return await Success(group.Select(x =>
             {
+                int dem = 0;
                 return new
                 {
-                    x.id,
-                    name = x.name.Decode(),
+                    x.Id,
+                    name = x.Name,
                     sort = dem++,
                     news = x.News?.Select(n =>
                     {
                         return new
                         {
-                            n.id,
-                            title = n.title.Decode(),
-                            created_time = new DateTime(n.created_time.Value).ToString("dd-MM-yyyy")
+                            n.Id,
+                            title = n.Title,
+                            created_time = n.CreatedDate?.ToString("dd-MM-yyyy")
                         };
                     })
                 };

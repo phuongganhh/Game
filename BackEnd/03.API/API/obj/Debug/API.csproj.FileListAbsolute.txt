@@ -434,3 +434,4 @@ C:\Project\Game\BackEnd\03.API\API\bin\System.Memory.xml
 C:\Project\Game\BackEnd\03.API\API\bin\System.Numerics.Vectors.xml
 C:\Project\Game\BackEnd\03.API\API\bin\System.Runtime.CompilerServices.Unsafe.xml
 C:\Project\Game\BackEnd\03.API\API\bin\System.Text.Encodings.Web.xml
+C:\Project\Game\BackEnd\03.API\API\bin\Entity.dll.config

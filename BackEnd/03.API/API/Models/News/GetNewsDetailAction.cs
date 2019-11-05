@@ -1,6 +1,8 @@
 ﻿using Common;
 using Common.Database;
+using Dapper.FastCrud;
 using Entity;
+using Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,23 +13,18 @@ namespace API.Models
 {
     public class GetNewsDetailAction : CommandBase<dynamic>
     {
-        public long? id { get; set; }
+        public long id { get; set; }
         protected override async Task<Result<dynamic>> ExecuteCore(ObjectContext context)
         {
-            var contents = await context
-                .Query
-                .From("news")
-                .LeftJoin("content","content.id","news.id")
-                .Select("news.title","news.height","content.content_html")
-                .Where("news.id", this.id)
-                .FetchAsync<News>()
+            var result = await context
+                .Connection
+                .FindAsync<News>(s=>s.Where($"NewsDetailId = @id").WithParameters(new { this.id}).Include<NewsDetail>())
                 ;
-            var result = contents.FirstOrDefault();
+            var content = result.FirstOrDefault();
             return await Success(new
             {
-                content_html = result.content_html.Decode(),
-                title = result.title.Decode(),
-                hegith = result.height
+                content_html = content.NewsDetail?.ContentHtml,
+                title = content.Title
             });
         }
     }

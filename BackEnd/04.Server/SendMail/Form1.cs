@@ -1,14 +1,10 @@
 ﻿using Common;
 using Common.Database;
+using Models;
 using SqlKata.Execution;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Timers;
 using System.Windows.Forms;
 
@@ -29,19 +25,19 @@ namespace SendMail
             timer.Start();
         }
         private static ObjectContext context = new ObjectContext();
-        private void UpdateMail(Entity.Mail mail)
+        private void UpdateMail(Mail mail)
         {
-            var result = context.Query.From("mail").Where("mail.id", mail.id).Update(new { sent = 1 }).PostData();
+            var result = context.Query.From("mail").Where("mail.id", mail.Id).Update(new { sent = 1 }).PostData();
         }
         private void Timer_Elapsed(object sender, ElapsedEventArgs e)
         {
             try
             {
-                var mail = context.Query.From("mail").Where("mail.sent", 0).FetchData<Entity.Mail>();
+                var mail = context.Query.From("mail").Where("mail.sent", 0).FetchData<Mail>();
                 foreach (var item in mail)
                 {
-                    LoggerManager.Logger.Info("SEND MAIL " + item.email);
-                    MailHelper.Instance.Send(item.email, "Xác thực tài khoản", item.message.Decode());
+                    LoggerManager.Logger.Info("SEND MAIL " + item.Email);
+                    MailHelper.Instance.Send(item.Email, "Xác thực tài khoản", item.Message);
                     this.UpdateMail(item);
                 }
             }

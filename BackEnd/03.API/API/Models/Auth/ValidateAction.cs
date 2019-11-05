@@ -1,14 +1,14 @@
 ﻿using Common;
 using Common.Database;
 using Dapper;
-using Entity;
+using Dapper.FastCrud;
+using Models;
 using Newtonsoft.Json;
 using SqlKata.Execution;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Web;
 
 namespace API.Models.Auth
 {
@@ -25,24 +25,19 @@ namespace API.Models.Auth
         }
         private Task<IEnumerable<User>> GetUser(ObjectContext context)
         {
-            return context.Query
-                .From("user")
-                .Where("user.token", this.token)
-                .Select("pa.user.token","pa.user.id")
-                .FetchAsync<User>()
-                ;
+            return context.Connection.FindAsync<User>(s => s.Where($"Token = @token").WithParameters(new { this.token }));
         }
         private async Task UpdateAccount(ObjectContext context,User u)
         {
             var result = await context.Query
                 .From("jz_acc.account")
-                .Where("jz_acc.account.id", u.id)
+                .Where("jz_acc.account.id", u.Id)
                 .Update(new
                 {
                     online = 0,
                     reg_date = DateTime.Now
-                }).ExecuteAsync();
-            if (!result)
+                }).ExecuteNotResult(context.ConnectionAccount);
+            if (result <= 0)
             {
                 LoggerManager.Logger.Error("903: Không thể update tài khoản - " + JsonConvert.SerializeObject(u));
                 throw new BusinessException("Đã xảy ra lỗi: 903",System.Net.HttpStatusCode.InternalServerError);

@@ -42,15 +42,27 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ApplicatioGroup.cs" />
-    <Compile Include="Application.cs" />
-    <Compile Include="Content.cs" />
-    <Compile Include="File.cs" />
-    <Compile Include="Mail.cs" />
-    <Compile Include="News.cs" />
-    <Compile Include="NewsGroup.cs" />
+    <Compile Include="jzAccount.cs" />
+    <Compile Include="Models\SampleModelGeneratorConfig.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SampleModelGeneratorConfig.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="User.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="Models\GenericModelGenerator.tt" />
+    <None Include="Models\SampleModelGeneratorConfig.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>SampleModelGeneratorConfig.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -1,7 +1,9 @@
-﻿using Entity;
+﻿using Common.Database;
+using Models;
 using SqlKata.Compilers;
 using SqlKata.Execution;
 using System;
+using System.Data;
 using System.Data.Odbc;
 using System.Globalization;
 using System.Linq;
@@ -48,7 +50,42 @@ namespace Common
             }
             return sb.ToString();
         }
-
+        public IDbConnection Connection
+        {
+            get
+            {
+                var conn =  this.service.Connection;
+                if(conn.State == ConnectionState.Closed)
+                {
+                    conn.Open();
+                }
+                return conn;
+            }
+        }
+        public OdbcConnection ConnectionJZ
+        {
+            get
+            {
+                var conn =  this.service.ConnectionJZ;
+                if(conn.State == ConnectionState.Closed)
+                {
+                    conn.Open();
+                }
+                return conn;
+            }
+        }
+        public OdbcConnection ConnectionAccount
+        {
+            get
+            {
+                var conn =  this.service.ConnectionAccount;
+                if(conn.State == ConnectionState.Closed)
+                {
+                    conn.Open();
+                }
+                return conn;
+            }
+        }
         public QueryFactory Query
         {
             get
@@ -56,6 +93,7 @@ namespace Common
                 return new QueryFactory(new OdbcConnection(), new MySqlCompiler());
             }
         }
+        private DatabaseConnectService service { get; set; }
         public static ObjectContext CreateContext(Controller controller, bool isAdmin = false)
         {
             return new ObjectContext(controller);
@@ -66,12 +104,13 @@ namespace Common
 
         private ObjectContext(Controller controller)
         {
+            this.service = new DatabaseConnectService();
             _controller = controller;
             //_repo = ServiceLocator.Current.GetInstance<IDbInfoRepository>();
         }
         public ObjectContext()
         {
-
+            this.service = new DatabaseConnectService();
         }
 
         private HttpContextBase Context { get { return _controller.HttpContext; } }

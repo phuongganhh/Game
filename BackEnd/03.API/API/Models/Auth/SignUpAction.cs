@@ -57,21 +57,16 @@ namespace API.Models.Auth
             }
             return Task.CompletedTask;
         }
-        private async Task InsertAccount(ObjectContext context)
+        private Task InsertAccount(ObjectContext context)
         {
             var sql = context.Query.From("jz_acc.account").Insert(new
             {
                 name = this.username.TrimSpace().ToLower(),
-                password = this.password,
+                this.password,
                 online = 1,
                 VIP = 1
             });
-            var result = await sql.ExecuteNotResult(context.ConnectionAccount);
-            if (result <= 0)
-            {
-                LoggerManager.Logger.Error($"900: Không thể đăng ký tài khoản! - ${sql.ToString()}");
-                this.Failed(900);
-            }
+            return sql.ExecuteNotResult(context.ConnectionAccount);
         }
         private void Failed(int error_code)
         {

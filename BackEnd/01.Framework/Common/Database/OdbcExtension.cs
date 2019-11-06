@@ -18,7 +18,7 @@ namespace Common.Database
 {
     public static class OdbcExtension
     {
-        private static bool vnIsNull(this object thiz)
+        private static bool VnIsNull(this object thiz)
         {
             return thiz == null || thiz == DBNull.Value;
         }
@@ -140,13 +140,15 @@ namespace Common.Database
         {
             var sql = query.Complie();
 
-            var values = new Dictionary<string, string>();
-            values["user"] = "test";
-            values["db"] = "pa";
-            values["password"] = "test";
-            values["host"] = "localhost";
-            values["q"] = sql.RawSql;
-            values["param"] = JsonConvert.SerializeObject(sql.NamedBindings.Select(x => x.Value).ToArray());
+            var values = new Dictionary<string, string>
+            {
+                ["user"] = "test",
+                ["db"] = "pa",
+                ["password"] = "test",
+                ["host"] = "localhost",
+                ["q"] = sql.RawSql,
+                ["param"] = JsonConvert.SerializeObject(sql.NamedBindings.Select(x => x.Value).ToArray())
+            };
 
             if (!client.DefaultRequestHeaders.Any(x => x.Key.Equals("secret")))
             {
@@ -163,13 +165,15 @@ namespace Common.Database
         {
             var sql = query;
 
-            var values = new Dictionary<string, string>();
-            values["user"] = "test";
-            values["db"] = "pa";
-            values["password"] = "test";
-            values["host"] = "localhost";
-            values["q"] = sql.RawSql;
-            values["param"] = JsonConvert.SerializeObject(sql.NamedBindings.Select(x => x.Value).ToArray());
+            var values = new Dictionary<string, string>
+            {
+                ["user"] = "test",
+                ["db"] = "pa",
+                ["password"] = "test",
+                ["host"] = "localhost",
+                ["q"] = sql.RawSql,
+                ["param"] = JsonConvert.SerializeObject(sql.NamedBindings.Select(x => x.Value).ToArray())
+            };
 
             if (!client.DefaultRequestHeaders.Any(x => x.Key.Equals("secret")))
             {

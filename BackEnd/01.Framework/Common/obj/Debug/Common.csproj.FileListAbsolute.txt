@@ -321,8 +321,6 @@ C:\Project\Game\BackEnd\01.Framework\Common\bin\Debug\FluentEmail.dll
 C:\Project\Game\BackEnd\01.Framework\Common\bin\Debug\RazorEngine.dll
 C:\Project\Game\BackEnd\01.Framework\Common\bin\Debug\RazorEngine.pdb
 C:\Project\Game\BackEnd\01.Framework\Common\bin\Debug\RazorEngine.xml
-C:\Project\Game\BackEnd\01.Framework\Common\bin\Debug\NLog.dll
-C:\Project\Game\BackEnd\01.Framework\Common\bin\Debug\NLog.xml
 C:\Project\Game\BackEnd\01.Framework\Common\bin\Debug\Microsoft.Owin.dll
 C:\Project\Game\BackEnd\01.Framework\Common\bin\Debug\Owin.dll
 C:\Project\Game\BackEnd\01.Framework\Common\bin\Debug\Microsoft.Owin.xml
@@ -341,8 +339,6 @@ C:\Project\Game\BackEnd\01.Framework\Common\bin\Debug\Microsoft.Extensions.Hosti
 C:\Project\Game\BackEnd\01.Framework\Common\bin\Debug\Microsoft.Extensions.Logging.dll
 C:\Project\Game\BackEnd\01.Framework\Common\bin\Debug\Microsoft.Extensions.ObjectPool.dll
 C:\Project\Game\BackEnd\01.Framework\Common\bin\Debug\Microsoft.Net.Http.Headers.dll
-C:\Project\Game\BackEnd\01.Framework\Common\bin\Debug\NLog.Extensions.Logging.dll
-C:\Project\Game\BackEnd\01.Framework\Common\bin\Debug\NLog.Web.AspNetCore.dll
 C:\Project\Game\BackEnd\01.Framework\Common\bin\Debug\System.Text.Encodings.Web.dll
 C:\Project\Game\BackEnd\01.Framework\Common\bin\Debug\Microsoft.AspNetCore.Hosting.Abstractions.xml
 C:\Project\Game\BackEnd\01.Framework\Common\bin\Debug\Microsoft.AspNetCore.Hosting.Server.Abstractions.xml
@@ -359,8 +355,6 @@ C:\Project\Game\BackEnd\01.Framework\Common\bin\Debug\Microsoft.Extensions.Hosti
 C:\Project\Game\BackEnd\01.Framework\Common\bin\Debug\Microsoft.Extensions.Logging.xml
 C:\Project\Game\BackEnd\01.Framework\Common\bin\Debug\Microsoft.Extensions.ObjectPool.xml
 C:\Project\Game\BackEnd\01.Framework\Common\bin\Debug\Microsoft.Net.Http.Headers.xml
-C:\Project\Game\BackEnd\01.Framework\Common\bin\Debug\NLog.Extensions.Logging.xml
-C:\Project\Game\BackEnd\01.Framework\Common\bin\Debug\NLog.Web.AspNetCore.xml
 C:\Project\Game\BackEnd\01.Framework\Common\bin\Debug\System.Text.Encodings.Web.xml
 C:\Project\Game\BackEnd\01.Framework\Common\bin\Debug\Dapper.FastCrud.dll
 C:\Project\Game\BackEnd\01.Framework\Common\bin\Debug\Entity.dll.config

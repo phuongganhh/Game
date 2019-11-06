@@ -17,24 +17,6 @@ namespace Models
 	using System.Collections.Generic;
 
     /// <summary>
-    /// A class which represents the Log table.
-    /// </summary>
-	[Table("Log")]
-	public partial class Log
-	{
-		[Key]
-	    public virtual string Id { get; set; }
-	    public virtual string Message { get; set; }
-	    public virtual string Type { get; set; }
-	    public virtual string StackTrace { get; set; }
-	    [ForeignKey("User")]
-        public virtual long? UserId { get; set; }
-	    public virtual string Param { get; set; }
-	    public virtual DateTime? CreatedDate { get; set; }
-		public virtual User User { get; set; }
-	}
-
-    /// <summary>
     /// A class which represents the Mail table.
     /// </summary>
 	[Table("Mail")]
@@ -241,10 +223,10 @@ namespace Models
 		public virtual File File { get; set; }
 		public virtual IEnumerable<News> News { get; set; }
 		public virtual IEnumerable<Chat> Chats { get; set; }
-		public virtual IEnumerable<Log> Logs { get; set; }
 		public virtual IEnumerable<Notify> Notifies { get; set; }
 		public virtual IEnumerable<SpinLog> SpinLogs { get; set; }
 		public virtual IEnumerable<File> Files { get; set; }
+		public virtual IEnumerable<Log> Logs { get; set; }
 	}
 
     /// <summary>
@@ -283,6 +265,25 @@ namespace Models
 	    public virtual bool Active { get; set; }
 	    public virtual int Permission { get; set; }
 		public virtual IEnumerable<FunctionGroup> FunctionGroups { get; set; }
+	}
+
+    /// <summary>
+    /// A class which represents the Log table.
+    /// </summary>
+	[Table("Log")]
+	public partial class Log
+	{
+		[Key]
+		[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+	    public virtual long Id { get; set; }
+	    public virtual string Message { get; set; }
+	    public virtual string Type { get; set; }
+	    public virtual string StackTrace { get; set; }
+	    [ForeignKey("User")]
+        public virtual long? UserId { get; set; }
+	    public virtual string Param { get; set; }
+	    public virtual DateTime? CreatedDate { get; set; }
+		public virtual User User { get; set; }
 	}
 
     /// <summary>

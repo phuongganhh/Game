@@ -16,7 +16,6 @@ export class HeaderRightComponent implements OnInit {
     this.banners.forEach(banner => {
       banner.active = item.id == banner.id;
     });
-    console.log(this.banners);
   }
   ngOnInit() {
     this._service.GetBanner().subscribe(x=>{

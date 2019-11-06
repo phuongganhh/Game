@@ -1,0 +1,28 @@
+li {
+    list-style: none;
+    height: 40px;
+    text-align: center;
+    border-radius: 4px;
+}
+
+li a {
+    color: black;
+}
+
+ul {
+    padding-left: 0;
+    border: 1px solid black;
+}
+
+.active a {
+    color: white;
+}
+
+.active {
+    background: #00000096;
+}
+
+li a {
+    font-weight: bold;
+    font-size: 20px;
+}

@@ -36,14 +36,14 @@ namespace SendMail
                 var mail = context.Query.From("mail").Where("mail.sent", 0).FetchData<Mail>();
                 foreach (var item in mail)
                 {
-                    LoggerManager.Logger.Info("SEND MAIL " + item.Email);
+                    LoggerManager.Instance.Info("SEND MAIL " + item.Email);
                     MailHelper.Instance.Send(item.Email, "Xác thực tài khoản", item.Message);
                     this.UpdateMail(item);
                 }
             }
             catch (Exception ex)
             {
-                LoggerManager.Logger.Error(ex.Message);
+                LoggerManager.Instance.Error(ex);
             }
         }
     }

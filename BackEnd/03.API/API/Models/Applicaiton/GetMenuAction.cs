@@ -41,14 +41,14 @@ namespace API.Models
         {
             IEnumerable<dynamic> result;
             var key = "GetMenuAction";
-            if (context.cache.IsSet(key))
+            if (context.Cache.IsSet(key))
             {
-                result = context.cache.Get<IEnumerable<dynamic>>(key);
+                result = context.Cache.Get<IEnumerable<dynamic>>(key);
             }
             else
             {
                 result = await this.GetData(context);
-                context.cache.Set(key, result, 60);
+                context.Cache.Set(key, result, 60);
             }
             return await Success(result);
         }

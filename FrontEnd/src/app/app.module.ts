@@ -18,6 +18,7 @@ import { StoreModule } from '@ngrx/store';
 import { reducers, metaReducers } from './reducers';
 import { HttpClientModule } from '@angular/common/http';
 import { ValidatePageComponent } from './pages/master/validate-page/validate-page.component';
+import { UserPageComponent } from './pages/master/user-page/user-page.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,7 +32,8 @@ import { ValidatePageComponent } from './pages/master/validate-page/validate-pag
     NewsPageComponent,
     MasterPageComponent,
     NewsDetailComponent,
-    ValidatePageComponent
+    ValidatePageComponent,
+    UserPageComponent
   ],
   imports: [
     BrowserModule,

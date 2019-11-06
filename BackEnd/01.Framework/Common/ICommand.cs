@@ -41,7 +41,7 @@ namespace Common
             }
             catch (BusinessException ex)
             {
-                LoggerManager.Logger.Info(ex.Message);
+                await LoggerManager.Instance.InfoAsync(ex.Message);
                 return new Result
                 {
                     code = (int)ex.exit_code,
@@ -50,7 +50,7 @@ namespace Common
             }
             catch(Exception ex)
             {
-                LoggerManager.Logger.Error(ex.Message);
+                await LoggerManager.Instance.ErrorAsync(ex);
                 return new Result
                 {
                     code = (int)HttpStatusCode.InternalServerError,
@@ -107,7 +107,7 @@ namespace Common
             }
             catch (BusinessException ex)
             {
-                LoggerManager.Logger.Info(ex.Message);
+                await LoggerManager.Instance.InfoAsync(ex.Message);
                 return new Result<T>
                 {
                     code = (int)ex.exit_code,
@@ -116,7 +116,7 @@ namespace Common
             }
             catch (Exception ex)
             {
-                LoggerManager.Logger.Error(ex,500.ToString());
+                await LoggerManager.Instance.ErrorAsync(ex);
                 return new Result<T>
                 {
                     code = (int)HttpStatusCode.InternalServerError,

@@ -7,6 +7,7 @@ import { MasterPageComponent } from './pages/master/master-page/master-page.comp
 import { NewsDetailComponent } from './pages/master/news-detail/news-detail.component';
 import { ValidatePageComponent } from './pages/master/validate-page/validate-page.component';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
+import { UserPageComponent } from './pages/master/user-page/user-page.component';
 
 
 const routes: Routes = [
@@ -27,6 +28,10 @@ const routes: Routes = [
             component: NewsDetailComponent
           }
         ]
+      },
+      {
+          path: 'user',
+          component: UserPageComponent
       }
     ],
     

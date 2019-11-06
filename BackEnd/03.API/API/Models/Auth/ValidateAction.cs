@@ -27,9 +27,9 @@ namespace API.Models.Auth
         {
             return context.Connection.FindAsync<User>(s => s.Where($"Token = @token").WithParameters(new { this.token }));
         }
-        private async Task UpdateAccount(ObjectContext context,User u)
+        private Task UpdateAccount(ObjectContext context,User u)
         {
-            var result = await context.Query
+            return context.Query
                 .From("jz_acc.account")
                 .Where("jz_acc.account.id", u.Id)
                 .Update(new
@@ -37,11 +37,6 @@ namespace API.Models.Auth
                     online = 0,
                     reg_date = DateTime.Now
                 }).ExecuteNotResult(context.ConnectionAccount);
-            if (result <= 0)
-            {
-                LoggerManager.Logger.Error("903: Không thể update tài khoản - " + JsonConvert.SerializeObject(u));
-                throw new BusinessException("Đã xảy ra lỗi: 903",System.Net.HttpStatusCode.InternalServerError);
-            }
         }
         protected override async Task<Result> ExecuteCore(ObjectContext context)
         {

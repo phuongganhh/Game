@@ -379,9 +379,6 @@ C:\Project\Game\BackEnd\03.API\API\bin\FluentEmail.dll
 C:\Project\Game\BackEnd\03.API\API\bin\RazorEngine.dll
 C:\Project\Game\BackEnd\03.API\API\bin\RazorEngine.pdb
 C:\Project\Game\BackEnd\03.API\API\bin\RazorEngine.xml
-C:\Project\Game\BackEnd\03.API\API\bin\NLog.dll
-C:\Project\Game\BackEnd\03.API\API\bin\NLog.xml
-C:\Project\Game\BackEnd\03.API\API\bin\NLog.config
 C:\Project\Game\BackEnd\03.API\API\bin\Microsoft.AspNetCore.Hosting.Abstractions.dll
 C:\Project\Game\BackEnd\03.API\API\bin\Microsoft.AspNetCore.Hosting.Server.Abstractions.dll
 C:\Project\Game\BackEnd\03.API\API\bin\Microsoft.AspNetCore.Http.Abstractions.dll
@@ -401,8 +398,6 @@ C:\Project\Game\BackEnd\03.API\API\bin\Microsoft.Extensions.ObjectPool.dll
 C:\Project\Game\BackEnd\03.API\API\bin\Microsoft.Extensions.Options.dll
 C:\Project\Game\BackEnd\03.API\API\bin\Microsoft.Extensions.Primitives.dll
 C:\Project\Game\BackEnd\03.API\API\bin\Microsoft.Net.Http.Headers.dll
-C:\Project\Game\BackEnd\03.API\API\bin\NLog.Extensions.Logging.dll
-C:\Project\Game\BackEnd\03.API\API\bin\NLog.Web.AspNetCore.dll
 C:\Project\Game\BackEnd\03.API\API\bin\System.Buffers.dll
 C:\Project\Game\BackEnd\03.API\API\bin\System.Memory.dll
 C:\Project\Game\BackEnd\03.API\API\bin\System.Numerics.Vectors.dll
@@ -427,8 +422,6 @@ C:\Project\Game\BackEnd\03.API\API\bin\Microsoft.Extensions.ObjectPool.xml
 C:\Project\Game\BackEnd\03.API\API\bin\Microsoft.Extensions.Options.xml
 C:\Project\Game\BackEnd\03.API\API\bin\Microsoft.Extensions.Primitives.xml
 C:\Project\Game\BackEnd\03.API\API\bin\Microsoft.Net.Http.Headers.xml
-C:\Project\Game\BackEnd\03.API\API\bin\NLog.Extensions.Logging.xml
-C:\Project\Game\BackEnd\03.API\API\bin\NLog.Web.AspNetCore.xml
 C:\Project\Game\BackEnd\03.API\API\bin\System.Buffers.xml
 C:\Project\Game\BackEnd\03.API\API\bin\System.Memory.xml
 C:\Project\Game\BackEnd\03.API\API\bin\System.Numerics.Vectors.xml

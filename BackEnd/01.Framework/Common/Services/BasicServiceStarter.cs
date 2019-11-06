@@ -55,7 +55,7 @@ namespace PA.Framework
             }
             catch (Exception ex)
             {
-                LoggerManager.Logger.Error($"Mail: {ex.Message}");
+                LoggerManager.Instance.Error(ex);
             }
             
         }

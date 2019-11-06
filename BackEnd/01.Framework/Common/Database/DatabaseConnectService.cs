@@ -12,14 +12,28 @@ namespace Common.Database
 {
     public class DatabaseConnectService
     {
-        public IDbConnection Connection { get; set; }
-        public OdbcConnection ConnectionJZ { get; set; }
-        public OdbcConnection ConnectionAccount { get; set; }
+        public IDbConnection Connection
+        {
+            get
+            {
+                return new SqlConnection(ConfigurationManager.ConnectionStrings["connection"].ConnectionString);
+            }
+        }
+        public OdbcConnection ConnectionJZ {
+            get
+            {
+                return new OdbcConnection(ConfigurationManager.ConnectionStrings["ConnectJZ"].ConnectionString);
+            }
+        }
+        public OdbcConnection ConnectionAccount
+        {
+            get
+            {
+                return new OdbcConnection(ConfigurationManager.ConnectionStrings["ConnectAccount"].ConnectionString);
+            }
+        }
         public DatabaseConnectService()
         {
-            this.Connection = new SqlConnection(ConfigurationManager.ConnectionStrings["connection"].ConnectionString);
-            this.ConnectionJZ = new OdbcConnection(ConfigurationManager.ConnectionStrings["ConnectJZ"].ConnectionString);
-            this.ConnectionAccount = new OdbcConnection(ConfigurationManager.ConnectionStrings["ConnectAccount"].ConnectionString);
         }
     }
 }

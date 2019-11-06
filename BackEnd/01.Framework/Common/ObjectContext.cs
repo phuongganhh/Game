@@ -19,7 +19,7 @@ namespace Common
     {
         public readonly Guid RequestId = Guid.NewGuid();
         
-        public ICacheManager cache
+        public ICacheManager Cache
         {
             get
             {

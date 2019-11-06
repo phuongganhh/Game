@@ -11,7 +11,8 @@ public class Cor : ActionFilterAttribute
     public override void OnActionExecuting(ActionExecutingContext filterContext)
     {
         filterContext.RequestContext.HttpContext.Response.AddHeader("Access-Control-Allow-Origin", "*");
-        LoggerManager.Logger.Trace($"{filterContext.HttpContext.Request.Url.OriginalString} {filterContext.HttpContext.Request.UserHostAddress}");
+        var request = filterContext.HttpContext.Request.Url;
+        LoggerManager.Instance.Trace($"{request.Scheme}://{request.Host}{request.AbsolutePath}", request.Query);
         base.OnActionExecuting(filterContext);
     }
 }
